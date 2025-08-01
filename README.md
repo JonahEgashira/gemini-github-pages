@@ -159,7 +159,7 @@ git config --global user.email "あなたのメールアドレス"
 > 郵便屋さん（GitHub）はその鍵でしか開かないようにしてくれる…そんなイメージです。
 </details>
 
-## GitHubでリポジトリを作成しローカルにクローン
+## GitHubでリポジトリを作成
 
 
 ### 1. GitHubで新しいリポジトリを作成
@@ -170,15 +170,25 @@ git config --global user.email "あなたのメールアドレス"
 4. 他の設定はデフォルトのままでOK（**README**は作成しなくてOK. Choose VisibilityもPublicのまま）
 5. **Create repository** をクリック
 
+作成が完了したら以下のような画面になる。一旦ページはこのままにしておいて、次のステップに進む。
 
-### 2. ターミナルでローカルにリポジトリを作成する
+![GitHub Setup](./images/github-setup.png)
+
+### 2.ローカルにリポジトリを作成し、GitHubのリポジトリと紐づける
 
 1. ターミナル上でコマンドを打ってリポジトリを作成する
 ```bash
 mkdir my-site # my-siteという名前のディレクトリを作成
 cd my-site # my-siteのディレクトリに移動
+echo "# my-site" >> README.md # READMD.mdというファイルを作成し、"my-site"という行を入れる
 git init # そのディレクトリをGit管理する初期化コマンド
+git add README.md # READMD.mdをGit管理する
+git commit -m "first commit" # Git管理に追加した変更をコミットする（記録をつける）
+git remote add origin git@github.com:<"あなたのアカウント名">/my-site.git # GitHub上のリポジトリに紐づける
+git push -u origin main # GitHub上のリポジトリに、ローカルでの変更を適用する
 ```
+
+- ここまでできたら、先ほど作成したGitHubのリポジトリのページを更新して確認してみてください。`README.md`というファイルが追加されているはずです。　
 
 <details markdown="1">
 <summary>補足：💡フォルダ、ディレクトリ、リポジトリの違い</summary>
@@ -206,4 +216,3 @@ git init # そのディレクトリをGit管理する初期化コマンド
 * GitHubにアップすると、そのままインターネット上のリポジトリにもなる
 
 </details>
-
