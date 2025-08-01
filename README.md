@@ -143,7 +143,7 @@ ssh -T git@github.com
 git config --global user.name "あなたの名前"
 git config --global user.email "あなたのメールアドレス"
 ```
-<details>
+<details markdown="1">
 <summary>補足：💡SSHキーとは何か</summary>
 
 * **SSH**（Secure Shell）は、インターネット越しに安全にサーバーとやりとりするための仕組みです
@@ -180,7 +180,7 @@ cd my-site # my-siteのディレクトリに移動
 git init # そのディレクトリをGit管理する初期化コマンド
 ```
 
-<details>
+<details markdown="1">
 <summary>補足：💡フォルダ、ディレクトリ、リポジトリの違い</summary>
 
 ### **📦 フォルダ**
