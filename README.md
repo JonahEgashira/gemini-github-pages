@@ -48,42 +48,106 @@
 - 右上の「Sign up」ボタンをクリック
 - 必要な情報を入れる
 
-確かにその通りですね！Gemini-CLIを使うならコマンドライン環境は避けられないので、一緒にGitコマンドも覚えてもらった方が一貫性があります。
+## Gitの準備とローカル操作（Mac / Windows）
 
-## Gitの準備とSSH設定
+### 1. ターミナルを開く
 
-### Gitのインストール
-- Windows: [Git for Windows](https://gitforwindows.org/)をダウンロード
-- Mac: ターミナルで `git --version`（入ってなければ自動でインストール案内）
+#### **Windowsの場合**
 
-### SSHキーの作成
+* **おすすめ**：Gitをインストールすると一緒に入る **Git Bash** を使うと便利です
+  （黒い画面にLinux風のコマンドが使える）
+
+1. [Git for Windows](https://gitforwindows.org/) をダウンロードしてインストール
+2. スタートメニューで **「Git Bash」** を検索して起動
+   （黒いウィンドウが開きます）
+3. ここで以降のコマンドを入力します
+
+※ もしPowerShellやコマンドプロンプトしか使えない場合も同じコマンドが使えますが、Git Bashのほうが初心者にはやさしいです。
+
+---
+
+#### **Macの場合**
+
+* 標準の **「ターミナル」** アプリを使います
+
+1. Finderで「アプリケーション → ユーティリティ → ターミナル」を開く
+   または **Spotlight検索（⌘+Space）** で「ターミナル」と入力して起動
+2. 黒い（または白い）ウィンドウが開きます
+3. ここで以降のコマンドを入力します
+
+---
+
+### 2. Gitが入っているか確認
+
 ```bash
-# メールアドレスは自分のものに変更
-ssh-keygen -t ed25519 -C "your-email@example.com"
+git --version
 ```
-- Enterを3回押す（パスフレーズは設定しなくてOK）
-- `~/.ssh/id_ed25519.pub` にキーが生成される
 
-### GitHubにSSHキーを登録
-1. 公開鍵の内容をコピー
-   ```bash
-   cat ~/.ssh/id_ed25519.pub
-   ```
-2. GitHub → Settings → SSH and GPG keys
-3. 「New SSH key」をクリック
-4. Title: 適当な名前（例：My Laptop）
-5. Key: コピーした内容を貼り付け
-6. 「Add SSH key」
+* **バージョン番号が表示されればOK**
+* Windowsで「command not found」や「認識されません」と出たら、Gitがインストールされていないので、[Git for Windows](https://gitforwindows.org/)をインストールしましょう。
+* Macでは入っていない場合、自動で「開発者ツールをインストールしますか？」と聞かれるので「はい」を選びます。
 
-### 接続テスト
+---
+
+### 3. SSHキーを作成してGitHubと接続
+
+#### **SSHキー作成**
+
+```bash
+ssh-keygen -t ed25519 -C "あなたのメールアドレス"
+```
+
+* **Enter**を3回押す（パスフレーズは空でOK）
+* キーは `~/.ssh/id_ed25519.pub` に作られます
+
+#### **公開鍵をコピー**
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+（WindowsのGit Bashでも同じコマンドでOK）
+
+#### **GitHubに登録**
+
+1. GitHub → 右上プロフィール → **Settings**
+2. 左メニューの「**SSH and GPG keys**」をクリック
+3. **New SSH key** を押す
+4. **Title**：わかりやすい名前（例：My Laptop）
+5. **Key**：コピーした公開鍵を貼り付け
+6. **Add SSH key** を押す
+
+---
+
+### 4. 接続テスト
+
 ```bash
 ssh -T git@github.com
 ```
-- 「Hi [ユーザー名]!」と表示されれば成功
 
-### Gitの初期設定
+* 「Hi \[ユーザー名]!」と出ればOK
+
+---
+
+### 5. Gitのユーザー情報を設定
+
 ```bash
 git config --global user.name "あなたの名前"
-git config --global user.email "your-email@example.com"
+git config --global user.email "あなたのメールアドレス"
 ```
+
+#### 補足：💡SSHキーは何をしているのか
+
+* **SSH**（Secure Shell）は、インターネット越しに安全にサーバーとやりとりするための仕組みです
+* **SSHキー**は「合鍵ペア」のようなもので、
+
+  * **秘密鍵** → あなたのPCに保管（絶対外に出さない）
+  * **公開鍵** → GitHubに登録してOK
+* GitHubは「この公開鍵と合う秘密鍵を持っている人だけを信頼する」しくみ
+* これにより、**毎回パスワードを入力せずに、安全に接続できる**ようになります
+
+> **例えるなら…**
+> 郵便受けに自分専用の鍵穴を付けて、鍵を持っているのはあなただけ。
+> 郵便屋さん（GitHub）はその鍵でしか開かないようにしてくれる…そんなイメージです。
+
 
