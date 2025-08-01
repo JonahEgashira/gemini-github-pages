@@ -4,23 +4,25 @@
 
 ### 目的
 
-- AI開発ツールであるGemini-CLIを用いて、GitHub Pages上にサイトを構築する方法を学び、実際に公開する
+- AI開発ツールであるGemini CLIを用いて、GitHub Pages上にサイトを構築する方法を学び、実際に公開する
 
 ### 得られるもの
 
-- Gemini-CLIの使い方（環境構築、上手な使い方、気をつけるべき点）
+- AIエージェントであるGeminiCLIの使い方（環境構築、上手な使い方、気をつけるべき点）
 - ターミナル上でのGitの操作、GitHubの使い方
 - HTML, CSS, Java Scriptを使ったWebサイト作成の方法
 
 ### 得られないもの
 
 - HTML, CSS, Java Scriptの詳細な文法
+- Geminiなどの言語モデル自体の理論
 
 
-## Gemini-CLI
-![Gemini-CLI](./images/gemini-cli.png)
+## GeminiCLI
+![Gemini CLI](./images/gemini-cli.png)
 - Googleが提供するオープンソースのAIエージェント
 - ターミナル上でGeminiモデルを利用してコード生成・修正、文章作成など、複数の業務を自然言語で操作可能
+- Webサイト上で使用するGeminiと違って、Gemini CLIはエージェントとして自身のPC上で色々な操作をしてくれるが、最低限ターミナル上での操作を覚える必要がある。
 
 ## Git, GitHub
 
@@ -204,3 +206,4 @@ git init # そのディレクトリをGit管理する初期化コマンド
 * GitHubにアップすると、そのままインターネット上のリポジトリにもなる
 
 </details>
+
