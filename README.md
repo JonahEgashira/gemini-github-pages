@@ -216,3 +216,36 @@ git push -u origin main # GitHub上のリポジトリに、ローカルでの変
 * GitHubにアップすると、そのままインターネット上のリポジトリにもなる
 
 </details>
+
+
+## Gemini CLI のインストール
+
+## Node.jsのインストール
+
+Gemini CLIをインストールするために、`Node.js`という実行環境が必要になります。
+`Node.js`はJavaScriptをパソコン、サーバー上で実行するための環境で、Gemini CLIなどのツールをインストールする際も使用されます。
+
+<details markdown="1">
+<summary>💡 コラム：JavaScriptとNode.jsの関係</summary>
+
+### 1. JavaScriptとは？
+- **プログラミング言語**のひとつ
+- 本来は**ブラウザの中で動く**ために作られた
+- Webページに動きをつける、フォームの入力チェック、アニメーションなどで活躍
+
+---
+
+### 2. Node.jsとは？
+- **JavaScriptをブラウザの外で動かせるソフトウェア（ランタイム環境）**
+- Google Chromeの「V8 JavaScriptエンジン」を利用
+- サーバーやパソコン上でJavaScriptを直接実行できる
+
+---
+
+### 3. 関係を一言でいうと
+> **JavaScript**：言語そのもの  
+> **Node.js**：その言語をパソコンやサーバーで動かすための実行環境
+
+---
+
+</details>
