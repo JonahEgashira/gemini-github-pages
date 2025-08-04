@@ -607,3 +607,9 @@ user> JavaScriptを使って、ページにタイピング風のアニメーシ�
 ![Gemini JS1](./images/gemini-js1.gif)
 
 自分好みのアニメーションや機能を実装してみましょう。
+
+```bash
+user> なんか上から数字が降ってきて、ハリウッドのハッカー映画みたいなページにして欲しい。
+```
+
+![Gemini JS2](./images/gemini-js2.gif)
