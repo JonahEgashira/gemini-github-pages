@@ -516,8 +516,6 @@ Pushが完了したら、GitHub上のリポジトリに正しく追加できて�
 ![GitHub my-site](./images/github-mysite.png)
 
 ## GitHub Pagesを使ってデプロイ
-# Start of Selection
-
 
 ### GitHub Pagesとは
 
