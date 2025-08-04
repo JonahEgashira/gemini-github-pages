@@ -1,4 +1,4 @@
-# AIを活用して自分のWebサイトを構築する講習会
+# Gemini CLIでWebサイトをつくろう
 
 ## はじめに
 
@@ -9,7 +9,7 @@
 ### 得られるもの
 
 - AIエージェントであるGeminiCLIの使い方（環境構築、上手な使い方、気をつけるべき点）
-- ターミナル上でのGitの操作、GitHubの使い方
+- ターミナル上でのGitの基礎の操作、GitHubの使い方
 - HTML, CSS, Java Scriptを使ったWebサイト作成の方法
 
 ### 得られないもの
@@ -17,12 +17,13 @@
 - HTML, CSS, Java Scriptの詳細な文法
 - Geminiなどの言語モデル自体の理論
 
-
 ## GeminiCLI
 ![Gemini CLI](./images/gemini-cli.png)
 - Googleが提供するオープンソースのAIエージェント
 - ターミナル上でGeminiモデルを利用してコード生成・修正、文章作成など、複数の業務を自然言語で操作可能
 - Webサイト上で使用するGeminiと違って、Gemini CLIはエージェントとして自身のPC上で色々な操作をしてくれるが、最低限ターミナル上での操作を覚える必要がある。
+
+# 環境構築（GitHub, Gemini CLI）
 
 ## Git, GitHub
 
@@ -108,6 +109,14 @@ ssh-keygen -t ed25519 -C "あなたのメールアドレス"
 * **Enter**を3回押す（パスフレーズは空でOK）
 * キーは `~/.ssh/id_ed25519.pub` に作られます
 
+### ⚠️注意事項⚠️
+
+- `.pub`がついているファイルは**公開鍵**で、他人に公開しても問題ありません。
+- `.pub`がついていないファイルは**秘密鍵**で、絶対に他人に教えたり、Webサイト上に貼り付けたりしてはいけません。
+
+この点に注意して、SSHキーを安全に管理してください。
+
+
 #### **公開鍵をコピー**
 
 ```bash
@@ -121,6 +130,7 @@ cat ~/.ssh/id_ed25519.pub
 1. GitHub → 右上プロフィール → **Settings**
 2. 左メニューの「**SSH and GPG keys**」をクリック
 3. **New SSH key** を押す
+![GitHub SSH](./images/github-ssh.png)
 4. **Title**：わかりやすい名前（例：My Laptop）
 5. **Key**：コピーした公開鍵を貼り付け
 6. **Add SSH key** を押す
@@ -225,8 +235,65 @@ git push -u origin main # GitHub上のリポジトリに、ローカルでの変
 Gemini CLIをインストールするために、`Node.js`という実行環境が必要になります。
 `Node.js`はJavaScriptをパソコン、サーバー上で実行するための環境で、Gemini CLIなどのツールをインストールする際も使用されます。
 
+### **Windows**
+
+1. **公式サイトへアクセス**
+   [https://nodejs.org/](https://nodejs.org/)
+
+2. **推奨版（LTS）をダウンロード**
+   緑色の **"LTS"** ボタンをクリック。
+
+3. **インストーラーを実行**
+
+   * すべて「Next」でOK（特別な設定不要）
+   * **"Add to PATH"** にチェックが入っていることを確認。
+
+4. **インストール確認**
+   コマンドプロンプト（または PowerShell）で
+
+   ```bash
+   node -v
+   ```
+
+   バージョンが表示されればOK。
+
+---
+
+### **Mac**
+
+#### 方法1: 公式インストーラー（初心者向け）
+
+1. **公式サイトへアクセス**
+   [https://nodejs.org/](https://nodejs.org/)
+
+2. **推奨版（LTS）をダウンロード**（macOS Installer）
+
+3. **インストーラーを実行** → すべてデフォルトでOK。
+
+4. **確認**（ターミナル）
+
+   ```bash
+   node -v
+   ```
+
+---
+
+#### 方法2: Homebrew（Macに慣れてる方向け）
+
+1. **Homebrewインストール済み**か確認（なければ[公式](https://brew.sh/)）
+2. ターミナルで
+
+   ```bash
+   brew install node
+   ```
+3. 確認
+
+   ```bash
+   node -v
+   ```
+
 <details markdown="1">
-<summary>💡 コラム：JavaScriptとNode.jsの関係</summary>
+<summary>補足：💡JavaScriptとNode.jsの関係</summary>
 
 ### 1. JavaScriptとは？
 - **プログラミング言語**のひとつ
@@ -249,3 +316,46 @@ Gemini CLIをインストールするために、`Node.js`という実行環境�
 ---
 
 </details>
+
+## Gemini CLIのインストール
+
+以下のコマンドを実行してインストール
+```bash
+npm install -g @google/gemini-cli
+```
+
+<details markdown="1">
+<summary>補足：💡npmとは？</summary>
+
+### npmとは？
+- **Node Package Manager**の略
+- Node.jsのための**パッケージ管理ツール**
+- JavaScriptのライブラリやツールを簡単にインストール、管理、共有できる
+- コマンドラインから利用可能で、`npm install`コマンドでパッケージをインストール
+
+</details>
+
+
+## Gemini CLIの実行
+
+ここまでお疲れ様でした。ターミナル上で`gemini`と入力して、Gemini CLIを起動しましょう
+```bash
+gemini
+```
+
+このような画面が出たら成功です。
+
+
+![Gemini CLI](./images/gemini-cli.png)
+
+
+# Gemini CLIを使ってWebサイトを作成する
+
+## シンプルなHTMLファイルの作成　
+
+- Gemini CLIのインストールが完了したら、実際にWebサイトを作っていきましょう。
+- ターミナル上で先ほど作成したリポジトリにいることを確認、もしくは移動してください。
+```bash
+pwd # 先ほど作成したmy-siteが表示されたらOK
+```
+
