@@ -94,8 +94,8 @@ git --version
 ```
 
 * **バージョン番号が表示されればOK**
-* Windowsで「command not found」や「認識されません」と出たら、Gitがインストールされていないので、[Git for Windows](https://gitforwindows.org/)をインストールしましょう。
 * Macでは入っていない場合、自動で「開発者ツールをインストールしますか？」と聞かれるので「はい」を選びます。
+* Windowsで「command not found」や「認識されません」と出たら、Gitがインストールされていないので、[Git for Windows](https://gitforwindows.org/)をインストールしましょう。
 
 ---
 
@@ -207,7 +207,6 @@ git push -u origin main # GitHub上のリポジトリに、ローカルでの変
 ### **📦 フォルダ**
 
 * パソコンの中でファイルを入れる「入れ物」
-* Windowsなら「フォルダー」、Macなら「フォルダ」
 * 物理的なディレクトリ構造の見た目のこと
 
 ---
