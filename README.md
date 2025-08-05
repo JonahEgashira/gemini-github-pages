@@ -392,6 +392,11 @@ gemini
 pwd # 先ほど作成したmy-siteが表示されたらOK
 ```
 
+**📂 pwd**
+
+* `pwd`は「print working directory」の略で、現在の作業ディレクトリのパスを表示するコマンドです
+* 例：`pwd` を実行すると、現在のディレクトリのフルパスが表示されます
+
 ### Geminiに依頼する
 
 以降、Gemini CLIを起動して、Gemini CLI上で入力する内容は、`user>`を先頭に書く以下ような書き方をすることとし、Geminiからの返答は`gemini>`を先頭に書くこととします
