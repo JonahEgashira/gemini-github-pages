@@ -207,6 +207,33 @@ git push -u origin main # GitHub上のリポジトリに、ローカルでの変
 
 - ここまでできたら、先ほど作成したGitHubのリポジトリのページを更新して確認してみてください。`README.md`というファイルが追加されているはずです
 
+
+<details markdown="1">
+<summary>補足：💡mkdir, cd, echoコマンドの詳細</summary>
+
+### **📂 mkdir**
+
+* `mkdir`は「make directory」の略で、新しいディレクトリ（フォルダ）を作成するコマンドです
+* 例：`mkdir my-site` は「my-site」という名前のディレクトリを作成します
+
+---
+
+### **📂 cd**
+
+* `cd`は「change directory」の略で、現在のディレクトリを変更するコマンドです
+* 例：`cd my-site` は「my-site」というディレクトリに移動します
+
+---
+
+### **📂 echo**
+
+* `echo`は指定した文字列を出力するコマンドです
+* 例：`echo "# my-site" >> README.md` は`README.md`というファイルに`# my-site`という行を追加します
+
+</details>
+
+
+
 <details markdown="1">
 <summary>補足：💡フォルダ、ディレクトリ、リポジトリの違い</summary>
 
