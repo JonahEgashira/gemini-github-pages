@@ -76,7 +76,7 @@ Web サイトを公開したり、開発を行う上では **GitHub アカウン
 ## GitHub Codespaces
 
 ### GitHub リポジトリを新規作成
-1. GitHub にログインし、右上の「＋」→ **New repository** をクリック  
+1. [GitHub にログイン](https://github.com/login)し、右上の「＋」→ [**New repository**](https://github.com/new) をクリック  
  ![GitHub-New](./images/github-new.png)
 2. Repository name に任意の名前 (例: `my-site`) を入力し **Create repository**
 ![GitHub-Create](./images/github-create.png)
@@ -86,29 +86,21 @@ Web サイトを公開したり、開発を行う上では **GitHub アカウン
 ![GitHub-Blank](./images/github-blank.png)
 2. Start coding with Codespacesの`Create a codespace` を選択。もしくは、ここの画面で`.`(キーボードのピリオド)を入力するとCodespacesが立ち上がります。
 
-### 3-3. Gemini CLI を起動してログイン
+### Gemini CLI を起動してログイン
 VS Code のターミナル (Ctrl+Shift+`) で以下を実行します。
 ```bash
 npx @google/gemini-cli
 ```
 初回実行時はブラウザが開き、Google アカウントでのログインを求められます。認証が完了するとターミナルに
 ```bash
-gemini>
+> Type your message or @path to file
 ```
-のプロンプトが表示され、Gemini CLI が使える状態になります。
+のようなプロンプトが表示され、Gemini CLI が使える状態になります。
 
-ここまで確認できれば Codespaces 環境の準備は完了です。以降のサイトの作成・公開手順はこの README の「Gemini CLIを使ってWebサイトを作成する」セクションを参照してください。
+ここまで確認できれば Codespaces 環境の準備は完了です。以降のサイトの作成・公開手順は「[Gemini CLIを使ってWebサイトを作成する](#Gemini-CLIを使ってWebサイトを作成する)」セクションを参照してください。
 
 
-
-### 3-4. よくあるつまずき & 無料枠の説明
-<details markdown="1"><summary>Codespaces が起動しない / container エラー</summary>
-
-- ブラウザ拡張や企業プロキシで WebSocket がブロックされていないか確認
-- 別タブで GitHub に再ログインしてから再試行
-</details>
-
-<details markdown="1"><summary>無料枠について</summary>
+<details markdown="1"><summary>Codespaces 無料枠について</summary>
 
 - 個人アカウントは **60 h / 月・120 core h / 月** までは無料  
 - 超過すると従量課金。使い終わったら Codespace を **Stop** / **Delete** すると安心  
@@ -125,18 +117,20 @@ gemini>
 
 ### 1. ターミナルを開く
 
-#### **Macの場合**
+<details markdown="1"><summary>Macの場合</summary>
 
-* 標準の **「ターミナル」** アプリを使います
+* 標準の **「ターミナル」** アプリを使います ![Terminal](./images/terminal.png)
 
 1. Finderで「アプリケーション → ユーティリティ → ターミナル」を開く
    または **Spotlight検索（⌘+Space）** で「ターミナル」と入力して起動します
 2. 黒い（または白い）ウィンドウが開きます
 3. ここで以降のコマンドを入力します
 
+</details>
+
 ---
 
-#### **Windowsの場合**
+<details markdown="1"><summary>Windowsの場合</summary>
 
 * **おすすめ**：Gitをインストールすると一緒に入る **Git Bash** を使うと便利です
   （黒い画面にLinux風のコマンドが使える）
@@ -148,7 +142,7 @@ gemini>
 
 ※ もしPowerShellやコマンドプロンプトしか使えない場合も同じコマンドが使えますが、Git Bashのほうが初心者にはやさしいです
 
----
+</details>
 
 ### 2. Gitが入っているか確認
 
@@ -238,8 +232,9 @@ git config --global user.email "あなたのメールアドレス"
 
 ### 1. GitHubで新しいリポジトリを作成
 
-1. GitHubにログイン
-2. 右上の「＋」→ **New repository** をクリック ![GitHub-New](./images/github-new.png)
+1. GitHubにログインし、[https://github.com/login](https://github.com/login) にアクセスしてログイン
+2. ログイン後、[https://github.com/new](https://github.com/new) にアクセス
+2. **New repository** のページが表示されます
 3. **Repository name**：任意の名前を入力（例：`my-site`）![GitHub-Create](./images/github-create.png)
 4. 他の設定はデフォルトのままでOK（**README**は作成しなくてOK. Choose VisibilityもPublicのまま）
 5. **Create repository** をクリック
