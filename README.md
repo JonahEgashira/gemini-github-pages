@@ -58,10 +58,11 @@ Web サイトを公開したり、開発を行う上では **GitHub アカウン
 2. **共同作業が簡単** - 複数人で同じプロジェクトを編集できます
 3. **無料でWebサイト公開** - GitHub Pagesで自分のサイトを世界に公開できます
 
+---
 
 # 3. 開発環境の準備
 
-あなたの PC や環境に合わせて、下記 2 つの開発スタイルから選んでください。(もちろん、両方使ってみてもよいです)
+本講義中は、GitHub Codespacesを用いてGemini CLIを利用します。GitHub Codespacesは、クラウド上で開発環境を提供するサービスで、ブラウザだけで開発環境を利用できます。これにより、インストールやセットアップの手間を省き、すぐに開発を始めることができます。
 
 
 | 選択肢 | 特長 | こんな人におすすめ |
@@ -72,16 +73,18 @@ Web サイトを公開したり、開発を行う上では **GitHub アカウン
 
 ---
 
-## 3. GitHub Codespaces 準備
+## GitHub Codespaces
 
-### 3-1. GitHub リポジトリを新規作成
+### GitHub リポジトリを新規作成
 1. GitHub にログインし、右上の「＋」→ **New repository** をクリック  
+ ![GitHub-New](./images/github-new.png)
 2. Repository name に任意の名前 (例: `my-site`) を入力し **Create repository**
+![GitHub-Create](./images/github-create.png)
 
-### 3-2. Codespace を起動
-1. 作成したリポジトリのトップページで **Code** ボタンをクリック  
-2. **Codespaces** タブ → **Create codespace on main** を選択  
-3. 数十秒待つとブラウザ版 VS Code が開きます
+### Codespace を起動
+1. 作成したリポジトリのトップページで **Code** ボタンをクリック(クリックしなくても初期画面でこのようになっていればOKです)
+![GitHub-Blank](./images/github-blank.png)
+2. Start coding with Codespacesの`Create a codespace` を選択。もしくは、ここの画面で`.`(キーボードのピリオド)を入力するとCodespacesが立ち上がります。
 
 ### 3-3. Gemini CLI を起動してログイン
 VS Code のターミナル (Ctrl+Shift+`) で以下を実行します。
@@ -114,16 +117,9 @@ gemini>
 
 ---
 
-## 4. ローカルセットアップ 編
+# ローカル環境構築編（任意）
 
-
-### （おさらい）GitHubアカウント作成（既に作成済みならスキップ）
-
-- ブラウザで [https://github.com](https://github.com) を開きます
-- 右上の「Sign up」ボタンをクリックします
-- 必要な情報を入れます
-
-![GitHub](./images//github.png)
+- 自分のPC上でGemini CLIを利用したい人向けの資料です。ローカルでGemini CLIを利用できるようになると、ファイル・フォルダ操作の自動化や、手元にある文書ファイルをGeminiが編集してくれるようになったりします。今後開発をしてみたいという方も、ローカルで開発環境を準備するのがおすすめです。準備は少々大変ですが、フォローアップも行いますので、ぜひ興味のある人は取り組んでみてください。
 
 ## Gitの準備とローカル操作（Mac / Windows）
 
@@ -244,7 +240,7 @@ git config --global user.email "あなたのメールアドレス"
 
 1. GitHubにログイン
 2. 右上の「＋」→ **New repository** をクリック ![GitHub-New](./images/github-new.png)
-3. **Repository name**：任意の名前を入力（例：`my-website`）
+3. **Repository name**：任意の名前を入力（例：`my-site`）![GitHub-Create](./images/github-create.png)
 4. 他の設定はデフォルトのままでOK（**README**は作成しなくてOK. Choose VisibilityもPublicのまま）
 5. **Create repository** をクリック
 
