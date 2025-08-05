@@ -187,7 +187,7 @@ npx @google/gemini-cli
 
 成功すると、このような大きな`GEMINI`の文字が表示され、Gemini CLIに対してメッセージを送って使える状態になります。
 
-ここまで確認できれば Codespaces 環境の準備は完了です。以降のサイトの作成・公開手順は「[Gemini CLIを使ってWebサイトを作成する](#Gemini-CLIを使ってWebサイトを作成する)」セクションを参照してください。
+ここまで確認できれば Codespaces 環境の準備は完了です。以降のサイトの作成・公開手順は「[Gemini CLIを使ってWebサイトを作成する](#gemini-cliを使ってwebサイトを作成する)」セクションを参照してください。
 
 
 <details markdown="1"><summary>Codespaces 無料枠について</summary>
