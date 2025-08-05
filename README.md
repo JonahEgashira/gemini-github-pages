@@ -1,6 +1,6 @@
 # Gemini CLIでWebサイトをつくろう
 
-## はじめに
+# 1. はじめに
 
 ### 目的
 
@@ -20,19 +20,28 @@
 
 ### 進め方
 
-- わからないことは積極的に近くの人やChatGPT, Gemini等のAIに聞きましょう
+- わからないことは積極的に近くの人やChatGPT, Geminiに聞きましょう
 - すでにGit, GitHubに慣れていたりする人はどんどん進めて構いません。周りの人が困っていたら助けてあげましょう
 - 講義スライドはありません。このWebページの内容を元に進めます
 
-## GeminiCLI
+## Gemini CLIとは
 ![Gemini CLI](./images/gemini-cli.png)
 - Googleが提供するオープンソースのAIエージェントです。
 - ターミナル上でGeminiモデルを利用してコード生成・修正、文章作成など、複数の業務を自然言語で操作可能です
 - Webサイト上で使用するGeminiと違って、Gemini CLIはエージェントとして自身のPC上で色々な操作をしてくれますが、最低限ターミナル上での操作を覚える必要があります
 
-# 環境構築（GitHub, Gemini CLI）
+# 2. GitHubアカウントを作成しよう
 
-## Git, GitHub
+Web サイトを公開したり、開発を行う上では **GitHub アカウント** があると便利です
+
+1. ブラウザで [https://github.com](https://github.com) を開く  
+2. 右上の **Sign up** をクリック  
+3. メールアドレス・ユーザー名・パスワードを入力し、画面の指示に従って登録  
+4. 登録が完了すると、あなたの **GitHub プロフィールページ** が表示されます
+
+![GitHub](./images/github.png)
+
+## GitとGitHubについて
 
 ### Git
 - **バージョン管理システム**の一つです
@@ -49,14 +58,66 @@
 2. **共同作業が簡単** - 複数人で同じプロジェクトを編集できます
 3. **無料でWebサイト公開** - GitHub Pagesで自分のサイトを世界に公開できます
 
-### 基本的な流れ
-1. GitHubでリポジトリ（プロジェクトの保管場所）を作成します
-2. 自分のパソコンで編集します
-3. 変更をGitで記録します
-4. GitHubにアップロードします
-5. GitHub Pagesで公開します
 
-## GitHubアカウント作成
+# 3. 開発環境の準備
+
+あなたの PC や環境に合わせて、下記 2 つの開発スタイルから選んでください。(もちろん、両方使ってみてもよいです)
+
+
+| 選択肢 | 特長 | こんな人におすすめ |
+|--------|------|--------------------|
+| **GitHub Codespaces** | ◎ インストール不要<br/>◎ ブラウザだけで完結<br/>◎ 社用 PC でも OK | Gemini CLIだけとりあえず使ってみたい / セットアップを短時間で終わらせたい |
+| **ローカルセットアップ** | ◎ 自分のPC上でAIエージェントが動く<br/>◎ ターミナル学習に最適 | コマンド操作を学びたい / 今後も開発をしてみたい |
+
+
+---
+
+## 3. GitHub Codespaces 準備
+
+### 3-1. GitHub リポジトリを新規作成
+1. GitHub にログインし、右上の「＋」→ **New repository** をクリック  
+2. Repository name に任意の名前 (例: `my-site`) を入力し **Create repository**
+
+### 3-2. Codespace を起動
+1. 作成したリポジトリのトップページで **Code** ボタンをクリック  
+2. **Codespaces** タブ → **Create codespace on main** を選択  
+3. 数十秒待つとブラウザ版 VS Code が開きます
+
+### 3-3. Gemini CLI を起動してログイン
+VS Code のターミナル (Ctrl+Shift+`) で以下を実行します。
+```bash
+npx @google/gemini-cli
+```
+初回実行時はブラウザが開き、Google アカウントでのログインを求められます。認証が完了するとターミナルに
+```bash
+gemini>
+```
+のプロンプトが表示され、Gemini CLI が使える状態になります。
+
+ここまで確認できれば Codespaces 環境の準備は完了です。以降のサイトの作成・公開手順はこの README の「Gemini CLIを使ってWebサイトを作成する」セクションを参照してください。
+
+
+
+### 3-4. よくあるつまずき & 無料枠の説明
+<details markdown="1"><summary>Codespaces が起動しない / container エラー</summary>
+
+- ブラウザ拡張や企業プロキシで WebSocket がブロックされていないか確認
+- 別タブで GitHub に再ログインしてから再試行
+</details>
+
+<details markdown="1"><summary>無料枠について</summary>
+
+- 個人アカウントは **60 h / 月・120 core h / 月** までは無料  
+- 超過すると従量課金。使い終わったら Codespace を **Stop** / **Delete** すると安心  
+- **Settings → Codespaces → Usage** で残り時間が確認できます
+</details>
+
+---
+
+## 4. ローカルセットアップ 編
+
+
+### （おさらい）GitHubアカウント作成（既に作成済みならスキップ）
 
 - ブラウザで [https://github.com](https://github.com) を開きます
 - 右上の「Sign up」ボタンをクリックします
