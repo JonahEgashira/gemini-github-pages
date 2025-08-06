@@ -376,15 +376,16 @@ GitHub Pagesは、GitHubが提供するサービスで、簡単にWebサイト�
 3. **GitHub Pagesの設定**
    - リポジトリのページに移動し、右上の「Settings」をクリックします
    - 左側のメニューから「Pages」を選択します
+   ![GitHub Pages main](./images/pages-main.png)
 
 
 4. **公開するブランチを選択**
    - 「Source」セクションで、公開したいブランチ（通常は`main`）を選択します
    - 「Save」をクリックして設定を保存します
-   ![GitHub Pages main](./images/pages-main.png)
 
 5. **サイトの公開を確認**
    - 設定が完了すると、GitHub PagesのURLが表示されます。このURLをクリックすると、公開されたWebサイトを確認できます
+   ![site-url](./images/site-url.png)
 
 これで、GitHub Pagesを使ってプロジェクトをデプロイすることができます。公開されたサイトは、GitHubリポジトリの更新に応じて自動的に更新されます
 
