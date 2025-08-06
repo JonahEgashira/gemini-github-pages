@@ -131,16 +131,16 @@ Web サイトを公開したり、開発を行う上では **GitHub アカウン
 
 1. [GitHub にログイン](https://github.com/login)し、右上の「＋」→ [**New repository**](https://github.com/new) をクリック  
  ![GitHub-New-Repo](./images/github-new-repo.png)
-2. Repository name に任意の名前 (例: `my-site`) を入力し **Create repository**
-![GitHub-Create](./images/github-create.png)
+2. Repository name に任意の名前 (例: `my-site`) を入力し、Add READMEをOnにして **Create repository**をクリック
+![GitHub-Create](./images/github-create-readme.png)
 
 ### Codespace を起動
-1. 作成したリポジトリのトップページで **Code** ボタンをクリック(クリックしなくても初期画面でこのようになっていればOKです)
-![GitHub-Blank](./images/github-blank.png)
-2. Start coding with Codespacesの`Create a codespace` を選択。もしくは、ここの画面で`.`(キーボードのピリオド)を入力するとCodespacesが立ち上がります。
-![CodeSpaces](./images/codespaces.png)
-3. GitHub Codespacesで作業を続行するを選択すると、インスタンスタイプを選択するよう促されます。ここでクラウド上で使用するマシンの性能を選択できます。今回は`2 cores, 8GB RAM, 32 GB storage`を選択しましょう。
-![instance-type](./images/instance-type.png)
+1. 作成したリポジトリのトップページがこのようになっていることを確認
+![GitHub-Blank](./images/github-start.png)
+2. 右上の「＋」→ **New Codespace** をクリック
+![GitHub-Repo-Code](./images/github-repo-code.png)
+3. Codespace作成の設定画面に移行するので、Repositoryから先ほど作成したリポジトリを選択。そのほかの設定はデフォルトのままでOK. **Create codespace**をクリック
+![GitHub-Code-Settings](./images/github-code-settings.png)
 
 ## Codespacesの画面構成
 
