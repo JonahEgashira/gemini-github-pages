@@ -130,7 +130,7 @@ Web サイトを公開したり、開発を行う上では **GitHub アカウン
 
 
 1. [GitHub にログイン](https://github.com/login)し、右上の「＋」→ [**New repository**](https://github.com/new) をクリック  
- ![GitHub-New](./images/github-new.png)
+ ![GitHub-New-Repo](./images/github-new-repo.png)
 2. Repository name に任意の名前 (例: `my-site`) を入力し **Create repository**
 ![GitHub-Create](./images/github-create.png)
 
