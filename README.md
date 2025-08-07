@@ -451,16 +451,21 @@ Gemini CLIと対話して、好きなスタイルを作ってみましょう
 user> ハッカー風の画面にして。
 ```
 
-
-```bash
-user> 8bitゲーム風のレトロなデザインにしてください。
-```
-
-```bash
-user> 8bitゲーム風のレトロなデザインにしてください。
-```
-
 ![Gemini CSS2](./images/gemini-css2.png)
+
+```bash
+user> 8bitゲーム風のレトロなデザインにしてください。
+```
+
+![Gemini Pixel](./images/pixel.gif)
+
+```bash
+user> どうぶつの森風の可愛いデザインにしてください。
+```
+
+![Doumori](./images/doumori.png)
+
+コンテンツの文体もどうぶつの森っぽくGeminiが変えたみたいですね。
 
 ## JavaScriptを追加する
 
