@@ -199,10 +199,9 @@ Gemini CLIのインストールが完了したら、実際にWebサイトを作�
 
 ### Geminiに依頼する
 
-今後、Gemini CLIを起動した後の入力は、`user>`を先頭に付けて記述します。Geminiからの返答は、`gemini>`を先頭に付けて記述します。
+今後、Gemini CLIを起動した後の入力は、`user>`を先頭に付けて記述します。
 ```bash
 user> ここにGeminiへのメッセージ、プロンプトが入ります。
-gemini> Geminiからの返答はこのように書きます。
 ```
 
 では、早速GeminiにHTMLファイルを作ってもらいましょう
