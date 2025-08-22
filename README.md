@@ -163,7 +163,7 @@ npx @google/gemini-cli
 
 ![codespace-gemini](./images/codespace-gemini.png)
 
-- Google アカウントでのログインを求められるので。`1. Login with Google`を選択しましょう。
+- Google アカウントでのログインを求められるので、`1. Login with Google`を選択しましょう。
 
 ![gemini-login](./images/gemini-login.png)
 
