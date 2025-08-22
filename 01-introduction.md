@@ -25,9 +25,8 @@ title: はじめに・概要
 
 ### 進め方
 
-- わからないことは積極的に近くの人やChatGPT, Geminiに聞きましょう
+- わからないことは積極的にまわりの人やChatGPT, Geminiに聞きましょう
 - すでにGit, GitHubに慣れていたりする人はどんどん進めて構いません。周りの人が困っていたら助けてあげましょう
-- 講義スライドはありません。このWebページの内容を元に進めます
 
 ## Gemini CLIとは
 ![Gemini CLI](./images/gemini-cli.png)
@@ -36,7 +35,7 @@ title: はじめに・概要
 
 ## GitHubアカウントを作成しよう
 
-Web サイトを公開したり、開発を行う上では **GitHub アカウント** があると便利です
+Web サイトを公開したり、開発を行う上では **GitHub アカウント** があると便利（ほぼ必須）です。
 
 1. ブラウザで [https://github.com](https://github.com) を開く  
 2. 右上の **Sign up** をクリック  

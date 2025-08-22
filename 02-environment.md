@@ -5,7 +5,8 @@ title: 開発環境（Codespaces など）
 
 # 開発環境の準備
 
-本講義中は、GitHub Codespacesを用いてGemini CLIを利用します。GitHub Codespacesは、クラウド上で開発環境を提供するサービスで、ブラウザだけで開発環境を利用できます。これにより、インストールやセットアップの手間を省き、すぐに開発を始めることができます。
+本講義中は、GitHub Codespacesを用いてGemini CLIを利用します。
+GitHub Codespacesは、クラウド上で開発環境を提供するサービスで、ブラウザだけで開発環境を利用できます。これにより、インストールやセットアップの手間を省き、すぐに開発を始めることができます。
 
 ---
 
@@ -125,14 +126,6 @@ npx @google/gemini-cli
 
 成功すると、このような大きな`GEMINI`の文字が表示され、Gemini CLIに対してメッセージを送って使える状態になります。
 
-ここまで確認できれば Codespaces 環境の準備は完了です。以降のサイトの作成・公開手順は「[Gemini CLIでWebサイトを作成する](./03-build-with-gemini.md)」セクションを参照してください。
-
----
-
-## ローカル環境構築編（オプション）
-
-自分のPC上でGemini CLIの環境を準備する方法は [ローカル環境構築編](./local-setup.md) に記載しています。興味のある方はぜひ取り組んでみて下さい。
-
----
+ここまで確認できれば Codespaces 環境の準備は完了です。
 
 次へ → [Gemini CLI でサイト作成](./03-build-with-gemini.md)
