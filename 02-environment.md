@@ -7,31 +7,17 @@ title: 開発環境（Codespaces など）
 
 本講義中は、GitHub Codespacesを用いてGemini CLIを利用します。GitHub Codespacesは、クラウド上で開発環境を提供するサービスで、ブラウザだけで開発環境を利用できます。これにより、インストールやセットアップの手間を省き、すぐに開発を始めることができます。
 
-| 選択肢 | 特長 | モチベーション |
-|--------|------|--------------------|
-| **GitHub Codespaces** | ◎ インストール不要<br/>◎ ブラウザだけで完結<br/>◎ 社用 PC でも OK | Gemini CLIだけとりあえず使ってみたい / セットアップを短時間で終わらせたい |
-| **ローカルセットアップ** | ◎ 自分のPC上でAIエージェントが動く<br/>◎ ターミナル学習に最適 | コマンド操作を学びたい / 今後も本格的に開発をしてみたい |
-
 ---
 
 # GitHub Codespaces とは？
 
-* **クラウド上にあるパソコン**を、あなた専用の開発用に用意してくれるサービスです。
-* 実際のパソコンは触らず、**インターネット経由でアクセス**して使います。
+GitHubが提供するクラウドの開発環境です。
+[GitHub Codespaces](https://github.co.jp/features/codespaces)
 
 * **環境構築不要**
   自分のPCに何もインストールしなくても、すぐ開発を始められます。
 * **どのPCでも同じ環境**
   チーム全員が同じ設定で作業できる
-
----
-
-💡 例えるなら：
-
-> 「自分専用のプログラミング用パソコンを、GitHub がクラウド上に貸してくれるサービス」
-> 必要なときだけ呼び出して、終わったら閉じる感じです。
-
----
 
 ## GitHub Codespacesでの作業手順
 
@@ -69,7 +55,7 @@ title: 開発環境（Codespaces など）
 
 1. [GitHub にログイン](https://github.com/login)し、右上の「＋」→ [**New repository**](https://github.com/new) をクリック  
  ![GitHub-New-Repo](./images/github-new-repo.png)
-2. Repository name に任意の名前 (例: `my-site`) を入力し、Add READMEをOnにして **Create repository**をクリック
+2. Repository name に任意の名前 (例: `my-site`) を入力し、`Add README`をOnにして **Create repository**をクリック
 ![GitHub-Create](./images/github-create-readme.png)
 
 ### Codespace を起動
@@ -80,11 +66,18 @@ title: 開発環境（Codespaces など）
 3. Codespace作成の設定画面に移行するので、Repositoryから先ほど作成したリポジトリを選択。そのほかの設定はデフォルトのままでOK. **Create codespace**をクリック
 ![GitHub-Code-Settings](./images/github-code-settings.png)
 
+### Codespacesの料金について
+
+Codespacesは毎月一定量まで無料で使用することができます。
+個人用のGitHubアカウントには、月あたり15GBのストレージと、120コア時間の使用時間が付与されます。
+コア時間は使用するマシンのスペックによって消費量が異なります。
+2コアマシンを1時間使うと2コア時間を消費し、8コアマシンを1時間使うと8コア時間という計算です。詳しくは[GitHub Codespacesの料金について](https://docs.github.com/ja/billing/concepts/product-billing/github-codespaces)をご確認ください。
+
 ## Codespacesの画面構成
 
-GitHub Codespacesは、クラウド上で動作するVS Code（Visual Studio Code）のようなものです。VS Codeは、Microsoftが提供する無料のソースコードエディターで、多くのプログラミング言語をサポートし、拡張機能を通じて機能を追加することができます。
+GitHub Codespacesは、クラウド上で動作するVS Code（Visual Studio Code）です。VS Codeは、Microsoftが提供する無料のソースコードエディターで、多くのプログラミング言語をサポートし、拡張機能を通じて機能を追加することができます。
 
-CodespacesおよびVS Codeの画面構成について簡単に説明します。
+Codespaces/VS Codeの画面構成について簡単に説明します。
 
 ![codespace-vscode](./images/codespace-vscode.png)
 
@@ -97,17 +90,23 @@ CodespacesおよびVS Codeの画面構成について簡単に説明します。
 3. **ターミナル**  
    画面下部に表示されるターミナルは、コマンドを実行するためのインターフェースです。ここでGitコマンドやnpmコマンドを実行して、プロジェクトの管理やビルドを行うことができます。VS Codeでもターミナルを内蔵しており、同様の操作が可能です。
 
-### Gemini CLI を起動してログイン
+---
+
+# Gemini CLI の起動
+それでは実際にCodespaces上でGemini CLIを動かしてみましょう。
+
 Codespaces のターミナルで以下を実行します。
 ```bash
 npx @google/gemini-cli
 ```
 
-`npx`コマンドでGemini CLIがインストールされ実行されます。
+`npx`コマンドでGemini CLIがCodespaces上のマシンにインストールされ実行されます。
 
 ![codespace-gemini](./images/codespace-gemini.png)
 
 - Google アカウントでのログインを求められるので、`1. Login with Google`を選択しましょう。
+
+**⚠️注意**：慶應のGoogleアカウントではGeminiの利用が制限されていて使えません。個人のGoogleアカウントでログインしてください。
 
 ![gemini-login](./images/gemini-login.png)
 
