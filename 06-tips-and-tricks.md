@@ -69,3 +69,6 @@ user> @apple-hp.png このappleのhpの画像を参考にして、appleっぽい
 
 Gemini CLI には `/compress` などの便利なコマンドもあります。（本ドキュメントでは割愛）
 
+---
+
+目次へ → [ホーム](./index.md)

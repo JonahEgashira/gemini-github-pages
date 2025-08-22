@@ -134,3 +134,6 @@ npx @google/gemini-cli
 
 自分のPC上でGemini CLIの環境を準備する方法は [ローカル環境構築編](./local-setup.md) に記載しています。興味のある方はぜひ取り組んでみて下さい。
 
+---
+
+次へ → [Gemini CLI でサイト作成](./03-build-with-gemini.md)

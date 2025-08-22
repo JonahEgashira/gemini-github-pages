@@ -68,3 +68,6 @@ GitHub Pagesは、GitHubが提供するサービスで、簡単にWebサイト�
 
 これで、GitHub Pagesを使ってプロジェクトをデプロイすることができます。公開されたサイトは、GitHubリポジトリの更新に応じて自動的に更新されます
 
+---
+
+次へ → [CSS/JavaScript で拡張](./05-style-and-js.md)

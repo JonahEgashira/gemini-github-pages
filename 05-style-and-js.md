@@ -130,3 +130,6 @@ user> three.jsを使って、ブロックが上からピラミッド上に積み
 
 ![three.js](./images/3d.gif)
 
+---
+
+次へ → [Tips・検索・画像添付](./06-tips-and-tricks.md)
