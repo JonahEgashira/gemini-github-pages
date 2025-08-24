@@ -67,11 +67,11 @@ GitHub Pagesは、GitHubが提供するサービスで、簡単にWebサイト�
    **Your site is live at [url]** の部分です。
    ![site-url](./images/site-url.png)
 
-これで、GitHub Pagesを使ってプロジェクトをデプロイすることができます。公開されたサイトは、GitHubリポジトリの更新に応じて自動的に更新されます
+これで、GitHub Pagesを使ってプロジェクトをデプロイすることができます。公開されたサイトは、GitHubリポジトリの更新に応じて自動的にアップデートされます。
 
 ## デプロイ状況の確認
 
-Webページに変更を加えてPushした後、何らかの理由でデプロイできていなかったりすることはあります。
+Webページに変更を加えてPushした後、何らかの理由でデプロイできていなかったりすることがあります。
 デプロイ状況の確認は上部の`Actions`タブから行えます。
 
 ![Actions](./images/github-actions.png)
