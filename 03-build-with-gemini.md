@@ -9,7 +9,7 @@ Gemini CLIのインストールが完了したら、実際にWebサイトを作�
 
 ## Geminiに依頼する
 
-今後、Gemini CLIを起動した後の入力は、`user>`を先頭に付けて記述します。
+Gemini CLIに対する入力と、ターミナル上で入力するコマンドを区別するため、今後Gemii CLIに対する入力には`user>`を先頭に付けて記述することとします。
 ```bash
 user> ここにGeminiへのメッセージ、プロンプトが入ります。
 ```
@@ -21,21 +21,27 @@ user> このリポジトリは、GitHub Pagesで公開する自分のWebサイ�
 
 ![Gemini HTML](./images/gemini-html.png)
 
-GeminiがHTMLファイルの内容を作成し、ユーザにファイル作成と変更の許可を求めます
+Gemini CLIがHTMLファイルを作成すると同時に、以下のような表示が出てくると思います。
+これは、Gemini CLIがコマンドを実行する際に、実行するコマンドについてユーザーに許可を求めています。
 
 ![Gemini Confirmation](./images/gemini-confirm.png)
+
+## Gemini CLIのコマンド実行時の確認と許可
+
+Gemini CLI は、ファイルの作成・編集・削除など多くの操作を代わりに実行します。誤操作を防ぐため、実行前に「何をどう変えるか」を表示し、内容を確認してから許可を求めます。
+
 ```bash
-1. Yes, allow once (今回のみ変更を許可する)
-2. Yes, allow always (このセッション内でのHTMLファイルの作成と変更を常に許可する)
-3. Modify with external editor (他のエディターでHTMLファイルを手動で変更する)
-4. No, suggest changes (esc) (Geminiが提案した変更を却下し、別の変更内容をユーザーが提案する)
+1. Yes, allow once             # 今回の変更だけ実行する
+2. Yes, allow always           # 同種の操作を、このセッション中は常に許可する
+3. Modify with external editor # 外部エディターで自分で編集する
+4. No, suggest changes (esc)   # 今回は実行せず、代案を提案する
 ```
 
-今回は 1. の`Yes, allow once`を選択しましょう。HTMLファイルが作成されます。
+通常は 1 の「Yes, allow once」を選ぶのが安全です。選択すると、表示された内容どおりにファイルが作成・更新されます。
 
-### ⚠️Gemini CLIの許可に関する注意点
+### ⚠️許可を出す際の注意
 
-実行するコマンドには十分注意してください。特に、`rm` や `rm -rf` などの削除系コマンドは、誤って重要なファイルを削除してしまう可能性があります。そのため、これらのコマンドに対しては `allow always` を選択しないことを**強くおすすめ**します。慎重に操作を行い、必要に応じて `allow once` を選択するようにしましょう。わからないコマンドが出てきたら、その都度`4. No, suggest changes`を選択し、そのコマンドがどのようなことをするのか、Gemini CLIに尋ねたりするのもよいでしょう。
+削除系コマンド（`rm`, `rm -rf` など）は特に注意してください。これらに対しては原則 `allow always` を選ばないことを**強く推奨**します。内容に不安がある場合は `4. No, suggest changes` を選び、何をするコマンドかをたずねるか、別案を提案しましょう。迷ったときは都度 `allow once` を選ぶと安全です。
 
 ## HTMLファイルを確認する
 

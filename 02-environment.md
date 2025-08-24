@@ -10,7 +10,7 @@ GitHub Codespacesは、クラウド上で開発環境を提供するサービス
 
 ---
 
-# GitHub Codespaces とは？
+# GitHub Codespaces とは
 
 GitHubが提供するクラウドの開発環境です。
 [GitHub Codespaces](https://github.co.jp/features/codespaces)
