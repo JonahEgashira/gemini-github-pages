@@ -312,6 +312,9 @@ user> three.jsを使って、ブロックが上からピラミッド上に積み
 
 ![three.js](./images/3d.gif)
 
+ここで紹介したページのアイデアの例は [こちら](https://jonahegashira.github.io/my-site/) にあります。
+このページもGemini CLI + GitHub Pagesで作成されています。
+
 ---
 
 次へ → [Tips・検索・画像添付](./06-tips-and-tricks.md)
