@@ -84,8 +84,6 @@ user> どうぶつの森風の可愛いデザインにしてください。
 ### JavaScriptとは
 JavaScriptは、ウェブページに動的な機能を追加するためのプログラミング言語です。ユーザーの操作に応じてページの内容を変更したり、アニメーションを追加したり、データを処理したりすることができます。HTMLとCSSがウェブページの構造と見た目を担当するのに対し、JavaScriptはインタラクティブな要素を提供します
 
-JavaScriptを使うことで、ユーザーの入力に応じたリアルタイムのフィードバックや、ページの一部を動的に更新することが可能になります。これにより、よりリッチでユーザーフレンドリーなウェブ体験を提供できます
-
 Gemini CLIを使って、JavaScriptを追加し、ページにインタラクティブな要素を加えてみましょう
 
 ```bash
@@ -105,7 +103,187 @@ user> 上から数字が降ってきて、ハリウッドのハッカー映画�
 
 ![Gemini JS2](./images/gemini-js2.gif)
 
-- 変更をしたらこまめに`add`, `commit`をして、区切りが付いたら`push`してデプロイ先に反映させましょう
+JavaScriptを使うと、スペースキーでジャンプするゲームなどを作ることもできます。
+
+```bash
+user> Flappy birdを作って欲しいです。スペースキーでジャンプするように作ってください。
+```
+
+![Flappy Bird](./images/flappy-bird.gif)
+
+- 変更をしたらこまめに`add`, `commit`をして、区切りが付いたら`push`してデプロイ先に反映させましょう。
+
+<details markdown="1">
+<summary>より詳しくHTML, CSS, JavaScriptの関係を理解しよう</summary>
+
+## HTML、CSS、JavaScriptの関係を理解しよう
+
+ウェブページは**HTML、CSS、JavaScript**の3つの技術が協力して動いています。それぞれの役割と、どのように連携しているかを見ていきましょう。
+
+### ウェブページの3層構造
+
+ウェブページは、建物のように3つの層で構成されています：
+
+1. **HTML（構造層）** - 建物の骨組み
+2. **CSS（表現層）** - 内装や外装のデザイン  
+3. **JavaScript（振る舞い層）** - 電気設備やエレベーターなどの動く仕組み
+
+### 📝 HTML：ページの骨組み
+
+HTMLは、ウェブページの**構造と内容**を定義します。
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>私のページ</title>
+</head>
+<body>
+    <h1>こんにちは</h1>
+    <p>これは段落です</p>
+    <button>クリックして</button>
+</body>
+</html>
+```
+
+**役割：**
+- テキスト、画像、ボタンなどのコンテンツを配置
+- ページの階層構造を定義
+- 他のファイル（CSS、JavaScript）への参照を含む
+
+### CSS：見た目のデザイン
+
+CSSは、HTMLで作った構造に**スタイル（見た目）**を適用します。
+
+```css
+h1 {
+    color: blue;
+    font-size: 32px;
+}
+
+button {
+    background-color: green;
+    padding: 10px;
+}
+```
+
+**役割：**
+- 色、フォント、サイズを設定
+- レイアウトや配置を調整
+- アニメーション効果を追加
+
+### JavaScript：動きと対話
+
+JavaScriptは、ページに**動的な機能**を追加します。
+
+```javascript
+document.querySelector('button').addEventListener('click', function() {
+    alert('ボタンがクリックされました！');
+});
+```
+
+**役割：**
+- ユーザーの操作に反応
+- ページの内容を動的に変更
+- データの処理と計算
+
+### どのように連携するか
+
+#### 1. HTMLがCSSとJavaScriptを読み込む
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- CSSファイルを読み込む -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>私のページ</h1>
+    
+    <!-- JavaScriptファイルを読み込む -->
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+#### 2. 読み込みの流れ
+
+```
+1. ブラウザがHTMLファイルを読み込む
+   ↓
+2. <link>タグを見つけたらCSSファイルを読み込む
+   ↓
+3. CSSのスタイルをHTMLの要素に適用
+   ↓
+4. <script>タグを見つけたらJavaScriptファイルを読み込む
+   ↓
+5. JavaScriptが実行され、ページが動的になる
+```
+
+### 実例：ボタンをクリックして色を変える
+
+この例では、3つの技術がどのように協力するかを示します：
+
+**index.html**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="box">クリックで色が変わるボックス</div>
+    <button id="colorBtn">色を変える</button>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+**style.css**
+```css
+#box {
+    width: 200px;
+    height: 100px;
+    background-color: lightblue;
+    padding: 20px;
+    text-align: center;
+}
+
+#colorBtn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+```
+
+**script.js**
+```javascript
+document.getElementById('colorBtn').addEventListener('click', function() {
+    const box = document.getElementById('box');
+    box.style.backgroundColor = 'lightgreen';
+});
+```
+
+### それぞれの特徴まとめ
+
+| 技術 | 役割 | ファイル拡張子 | 書く場所 |
+|------|------|--------------|----------|
+| HTML | 構造・内容 | .html | `<body>`内 |
+| CSS | デザイン・見た目 | .css | `<style>`タグ内 または 外部ファイル |
+| JavaScript | 動作・機能 | .js | `<script>`タグ内 または 外部ファイル |
+
+### 覚えておくべきポイント
+
+1. **HTMLが基本** - 必ずHTMLから始まり、CSSとJavaScriptはHTMLから読み込まれる
+2. **CSSは見た目だけ** - HTMLの構造を変えずに、見た目だけを変更
+3. **JavaScriptは万能** - HTMLの構造もCSSのスタイルも、JavaScriptから変更可能
+4. **読み込み順序が重要** - 特にJavaScriptは、操作したいHTML要素の後に読み込む
+
+この3つの技術を組み合わせることで、静的なドキュメントから、美しくインタラクティブなウェブアプリケーションまで、あらゆるウェブページを作ることができます。
+
+</details>
 
 ## 4. ライブラリを使ってより表現力を上げる
 
