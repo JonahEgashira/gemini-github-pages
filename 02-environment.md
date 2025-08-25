@@ -129,3 +129,4 @@ npx @google/gemini-cli
 ここまで確認できればCodespaces環境の準備は完了です。
 
 次へ → [Gemini CLI でサイト作成](./03-build-with-gemini.md)
+目次へ → [ホーム](./index.md)

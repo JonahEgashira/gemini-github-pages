@@ -86,3 +86,4 @@ Webページに変更を加えてpushした後、何らかの理由でデプロ�
 ---
 
 次へ → [CSS/JavaScript で拡張](./05-style-and-js.md)
+目次へ → [ホーム](./index.md)

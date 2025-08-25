@@ -96,3 +96,4 @@ Webサイトを公開したり、開発を行う上では **GitHub アカウン�
 - 無料でWebサイトを公開できる「GitHub Pages」など、開発に便利な機能が複数存在します
 
 次へ → [開発環境（Codespaces など）](./02-environment.md)
+目次へ → [ホーム](./index.md)

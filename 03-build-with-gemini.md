@@ -162,3 +162,4 @@ user> 変更を確認してpushしてください
 ---
 
 次へ → [GitHub Pages へデプロイ](./04-deploy-github-pages.md)
+目次へ → [ホーム](./index.md)

@@ -402,3 +402,4 @@ user> いまある変更をすべてpushしてください。
 pushが完了したら、GitHub上のリポジトリに正しく追加できているか確認してみましょう。先ほどGitHub上で作成したリポジトリに、`index.html`があれば成功です。
 
 ![GitHub my-site](./images/github-mysite.png)
+目次へ → [ホーム](./index.md)
