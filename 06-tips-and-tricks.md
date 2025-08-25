@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Tips・検索・画像添付
+title: Gemini CLI Tips
 ---
 
 # Gemini CLI Tips

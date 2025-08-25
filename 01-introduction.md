@@ -1,6 +1,6 @@
 ---
 layout: default
-title: はじめに・概要
+title: はじめに
 ---
 
 # はじめに

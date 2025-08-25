@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 開発環境（Codespaces など）
+title: 開発環境の準備
 ---
 
 # 開発環境の準備
