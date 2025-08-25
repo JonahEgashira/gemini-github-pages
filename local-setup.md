@@ -6,7 +6,7 @@ permalink: /local-setup/
 
 # 自分のPCでGemini CLIを使う
 
-- 自分のPC上でGemini CLIを利用したい人向けの資料です。ローカルでGemini CLIを利用できるようになると、ファイル・フォルダー操作の自動化や、手元にある文書ファイルをGeminiが編集してくれるようになります。初めて開発を行う方にとって準備は少し大変ですが、フォローアップも行うので、ぜひ興味のある人は取り組んでみてください。
+- 自分のPC上でGemini CLIを利用したい方向けの資料です。ローカルでGemini CLIを使えるようになると、ファイル・フォルダー操作の自動化や、手元の文書ファイルをGeminiに編集させることができます。初めて開発に取り組む方にとって準備は少し大変ですが、フォローアップも行うので、ぜひ挑戦してみてください。
 
 ## Gitの準備とローカル操作（Mac/Windows）
 
@@ -37,7 +37,41 @@ permalink: /local-setup/
    （黒いウィンドウが開きます）
 3. ここで以降のコマンドを入力します
 
+---
+
+#### PowerShellで使う場合（標準のターミナル）
+
+1. スタートメニューで **「PowerShell」** を検索して起動
+2. `git --version` が表示されれば、以降のコマンドはそのまま使えます
+3. 公開鍵の表示は `cat` の代わりに `type` を使えます
+   - 例：`type $env:USERPROFILE\.ssh\id_ed25519.pub`
+4. `ssh` や `ssh-keygen` コマンドが見つからない場合は、Windowsの「OpenSSH クライアント」を有効化してください（管理者権限）
+   - 設定 → アプリ → オプション機能 → OpenSSH クライアントを追加
+   - または PowerShell（管理者）で：`Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0`
+
+---
+
+#### Windows Terminalで使う場合（複数シェルをまとめて管理）
+
+1. Microsoft Storeから **Windows Terminal** をインストール（入っていればOK）
+2. タブのメニュー（∨）から **PowerShell** または **Git Bash** を選択
+3. 選択したシェル上で本資料のコマンドを実行します
+
+---
+
+#### コマンドプロンプト（cmd.exe）で使う場合
+
+1. スタートメニューで **「コマンド プロンプト」** を起動
+2. 基本的に同じコマンドで操作できます
+   - `cat` の代わりに `type` を使用（例：`type %USERPROFILE%\.ssh\id_ed25519.pub`）
+
 </details>
+
+このように囲われた文字はコマンドになります。Mac/Windowsでターミナルが開けたら、ターミナル上でこのコマンドを入力、もしくはコピー＆ペーストし、Enterキーで実行しましょう。
+
+```bash
+このように囲われた部分がコマンドです。
+```
 
 ### 2. Gitがインストールされているか確認
 
@@ -72,7 +106,7 @@ ssh-keygen -t ed25519 -C "あなたのメールアドレス"
 ```
 
 * **Enter**を3回押す（パスフレーズは空でOK）
-* キーは `~/.ssh/id_ed25519.pub` に作られます
+* 公開鍵は `~/.ssh/id_ed25519.pub` に作成されます
 
 ### ⚠️注意事項⚠️
 
@@ -108,6 +142,7 @@ ssh -T git@github.com
 ```
 
 * 「Hi [ユーザー名]!」と出ればOK
+* 初回は接続確認（Are you sure you want to continue connecting...）が表示されることがあります。表示されたら `yes` と入力して続行してください
 
 ---
 
@@ -133,7 +168,7 @@ git config --global user.email "あなたのメールアドレス"
 
 ![GitHub Setup](./images/github-setup.png)
 
-### 2.ローカルにリポジトリを作成し、GitHubのリポジトリと紐づける
+### 2. ローカルにリポジトリを作成し、GitHubのリポジトリと紐づける
 
 1. ターミナル上でコマンドを打ってリポジトリを作成する
 ```bash
@@ -143,7 +178,8 @@ echo "# my-site" >> README.md # README.mdというファイルを作成し、"my
 git init # そのディレクトリをGit管理する初期化コマンド
 git add README.md # README.mdをGit管理する
 git commit -m "first commit" # Git管理に追加した変更をコミットする（記録をつける）
-git remote add origin git@github.com:<"あなたのアカウント名">/my-site.git # GitHub上のリポジトリに紐づける
+git branch -M main # デフォルトブランチ名をmainに変更
+git remote add origin git@github.com:<あなたのアカウント名>/my-site.git # GitHub上のリポジトリに紐づける
 git push -u origin main # GitHub上のリポジトリに、ローカルでの変更を適用する
 ```
 
@@ -312,7 +348,7 @@ gemini
    - GitHub Codespacesと同様に、左側にファイル管理、中央にコードエディター、下部にターミナル等がデフォルトで配置されています。
    ![VSCode Screen](./images/vscode-screen.png)
 
-- 基本的にはGemini CLIがコードの作成、編集などすべて行ってくれますが、一部分すぐに直したかったり、どんなコードが書かれているかを確認したい時はVS Codeなどのコードエディターを使用するのも便利です。
+- 基本的にはGemini CLIがコードの作成、編集などすべて行ってくれますが、一部をすぐに直したかったり、どんなコードが書かれているかを確認したいときはVS Codeなどのコードエディターを使用するのも便利です。
 
 ### HTMLファイルをブラウザで表示する
 
@@ -350,7 +386,7 @@ HTMLファイルが作られていることが確認できたら、実際にブ�
 - **ブラウザーの「ファイル」メニューから開く**
   - ブラウザーを開き、メニューから「ファイル」→「ファイルを開く」を選択し、HTMLファイルを選択して開くことも可能です
 
-これらの方法で、作成したHTMLファイルを簡単にブラウザで確認することができます
+これらの方法で、作成したHTMLファイルを簡単にブラウザーで確認することができます
 
 
 ## HTMLをGitHub上のリポジトリにpush
@@ -385,7 +421,7 @@ pushとは、ローカルで行った変更をリモートリポジトリ（GitH
 
 ## 🤖 Gemini CLIを使ったGitの操作
 
-変更があるたびに、ターミナルに`git add .`や`git commit`を毎回打つのは面倒です。そこで、そのようなGitの操作もすべてGemini CLIにお任せしてみましょう。
+変更があるたびに、ターミナルに`git add .`や`git commit`を毎回入力するのは面倒です。そこで、そのようなGitの操作もすべてGemini CLIにお任せしてみましょう。
 
 ```bash
 user> いまある変更をすべてpushしてください。
