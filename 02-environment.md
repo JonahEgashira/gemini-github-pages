@@ -67,12 +67,16 @@ GitHubが提供するクラウドの開発環境です。
 3. Codespace作成の設定画面に移行するので、Repositoryから先ほど作成したリポジトリを選択します。その他の設定はデフォルトのままでOKです。**Create codespace**をクリックします。
 ![GitHub-Code-Settings](./images/github-code-settings.png)
 
-### Codespacesの料金について
+<details markdown="1">
+<summary>
+Codespacesの料金について
+</summary>
 
 Codespacesは毎月一定量まで無料で使用することができます。
 個人用のGitHubアカウントには、月あたり15GBのストレージと、120コア時間の使用時間が付与されます。
 コア時間は使用するマシンのスペックによって消費量が異なります。
 2コアマシンを1時間使うと2コア時間を消費し、8コアマシンを1時間使うと8コア時間という計算です。詳しくは[GitHub Codespacesの料金について](https://docs.github.com/ja/billing/concepts/product-billing/github-codespaces)をご確認ください。
+</details>
 
 ## Codespacesの画面構成
 
