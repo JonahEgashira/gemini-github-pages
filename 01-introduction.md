@@ -47,7 +47,7 @@ title: はじめに
 
 <details markdown="1"><summary>💡 API と CLI とは</summary>
 
-### APIとは？
+### APIとは
 **API（Application Programming Interface）** は、異なるソフトウェア同士が情報をやり取りするための「窓口」のようなものです。
 
 #### プログラミングでの例
@@ -55,7 +55,7 @@ title: はじめに
 - **地図アプリ** → マップ API → **地図データサービス**
 - **今回の例** → Gemini API → **Googleの言語モデル**
 
-### ⌨️ CLIとは？
+### CLIとは
 **CLI（Command Line Interface）** は、文字だけでコンピュータを操作する方法です。
 
 #### GUIとCLIの違い
