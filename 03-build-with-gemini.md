@@ -39,6 +39,10 @@ Gemini CLIは、ファイルの作成・編集・削除など多くの操作を�
 
 通常は1の「Yes, allow once」を選ぶのが安全です。選択すると、表示された内容どおりにファイルが作成・更新されます。
 
+![Gemini Suggest](./images/gemini-suggest.png)
+
+*4. No, suggest changes (esc)を選択した時の様子。入力受付状態になり、Gemini CLIに対する変更を提案できます。*
+
 ### ⚠️許可を出す際の注意
 
 削除系コマンド（`rm`、`rm -rf` など）は特に注意してください。これらに対しては、原則`allow always`を選ばないことを**強く推奨**します。内容に不安がある場合は`4. No, suggest changes`を選び、何をするコマンドかを尋ねるか、別案を提案しましょう。迷ったときは都度`allow once`を選ぶと安全です。
