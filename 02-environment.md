@@ -10,7 +10,7 @@ GitHub Codespacesは、クラウド上で開発環境を提供するサービス
 
 ---
 
-# GitHub Codespaces とは
+# GitHub Codespacesとは
 
 GitHubが提供するクラウドの開発環境です。
 [GitHub Codespaces](https://github.co.jp/features/codespaces)
@@ -18,11 +18,11 @@ GitHubが提供するクラウドの開発環境です。
 * **環境構築不要**
   自分のPCに何もインストールしなくても、すぐ開発を始められます。
 * **どのPCでも同じ環境**
-  チーム全員が同じ設定で作業できる
+  チーム全員が同じ設定で作業できます。
 
 ## GitHub Codespacesでの作業手順
 
-まずはじめにGitHubでリポジトリを作成しましょう
+まずはじめに、GitHubでリポジトリを作成しましょう。
 
 ### GitHub リポジトリを新規作成
 
@@ -42,7 +42,7 @@ GitHubが提供するクラウドの開発環境です。
 
 * フォルダとほぼ同じ意味ですが、**コンピュータ用語寄り**
 * ターミナルやコマンドラインで「今いる場所」を指すときに「ディレクトリ」と言う
-* 例：`cd my-site` は「my-site」というディレクトリに移動」
+* 例：`cd my-site` は「my-site」というディレクトリに移動するという意味です。
 
 ---
 
@@ -50,21 +50,21 @@ GitHubが提供するクラウドの開発環境です。
 
 * Gitで管理されているフォルダ（＋その中の履歴データ）
 * 普通のフォルダとの違いは「中に `.git` という隠しフォルダがあり、過去の履歴や設定が入っている」こと
-* GitHubにアップすると、そのままインターネット上のリポジトリにもなる
+* GitHubにアップすると、そのままインターネット上のリポジトリにもなります。
 
 </details>
 
 1. [GitHub にログイン](https://github.com/login)し、右上の「＋」→ [**New repository**](https://github.com/new) をクリック  
  ![GitHub-New-Repo](./images/github-new-repo.png)
-2. Repository name に任意の名前 (例: `my-site`) を入力し、`Add README`をOnにして **Create repository**をクリック
+2. Repository name に任意の名前（例：`my-site`）を入力し、`Add README` をオンにして、**Create repository** をクリックします。
 ![GitHub-Create](./images/github-create-readme.png)
 
-### Codespace を起動
-1. 作成したリポジトリのトップページがこのようになっていることを確認
+### Codespaceを起動
+1. 作成したリポジトリのトップページがこのようになっていることを確認します。
 ![GitHub-Blank](./images/github-start.png)
-2. 右上の「＋」→ **New Codespace** をクリック
+2. 右上の「＋」→ **New Codespace** をクリックします。
 ![GitHub-Repo-Code](./images/github-repo-code.png)
-3. Codespace作成の設定画面に移行するので、Repositoryから先ほど作成したリポジトリを選択。そのほかの設定はデフォルトのままでOK. **Create codespace**をクリック
+3. Codespace作成の設定画面に移行するので、Repositoryから先ほど作成したリポジトリを選択します。その他の設定はデフォルトのままでOKです。**Create codespace**をクリックします。
 ![GitHub-Code-Settings](./images/github-code-settings.png)
 
 ### Codespacesの料金について
@@ -93,7 +93,7 @@ Codespaces/VS Codeの画面構成について簡単に説明します。
 
 ---
 
-# Gemini CLI の起動
+# Gemini CLIの起動
 それでは実際にCodespaces上でGemini CLIを動かしてみましょう。
 
 Codespaces のターミナルで以下を実行します。
@@ -101,7 +101,7 @@ Codespaces のターミナルで以下を実行します。
 npx @google/gemini-cli
 ```
 
-`npx`コマンドでGemini CLIがCodespaces上のマシンにインストールされ実行されます。
+`npx`コマンドでGemini CLIがCodespaces上のマシンにインストールされ、実行されます。
 
 ![codespace-gemini](./images/codespace-gemini.png)
 
@@ -112,7 +112,7 @@ npx @google/gemini-cli
 ![gemini-login](./images/gemini-login.png)
 
 - `1. Login with Google`を選択したら、ターミナル上に出てくるURLをクリックします。
-- 一度目ではこのURLが出てこない場合がありますが、その時は再度`npx @google/gemini-cli`を実行して下さい。
+- 最初はこのURLが表示されない場合があります。その場合は、再度`npx @google/gemini-cli`を実行してください。
 
 ![gemini-url](./images/gemini-url.png)
 
@@ -120,12 +120,12 @@ npx @google/gemini-cli
 
 ![gemini-copy](./images/gemini-code.png)
 
-- 再度Codespacesに戻り、このコードをペーストして、Enterを入力します。
+- 再度Codespacesに戻り、このコードをペーストして、Enterキーを押します。
 
 ![gemini-success](./images/gemini-success.png)
 
 成功すると、このような大きな`GEMINI`の文字が表示され、Gemini CLIに対してメッセージを送って使える状態になります。
 
-ここまで確認できれば Codespaces 環境の準備は完了です。
+ここまで確認できればCodespaces環境の準備は完了です。
 
 次へ → [Gemini CLI でサイト作成](./03-build-with-gemini.md)
