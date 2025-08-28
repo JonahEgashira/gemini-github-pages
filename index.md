@@ -20,4 +20,4 @@ Gemini CLIとGitHubを活用してWebサイトを作成、公開する手法が�
 本講義では時間の都合上、GitHub Codespaces 上で Gemini CLI を使用します。
 ご自身の PC に環境を構築すれば、手元のファイルも Gemini CLI で操作できます。興味のある方は次のリンクをご参照ください。
 - [ローカル環境構築編](./local-setup.md)
-- [ローカルAgent CLI活用術](./agent-cli-local.md)
+- [ローカルエージェントCLI活用術](./agent-cli-local.md)

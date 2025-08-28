@@ -88,7 +88,7 @@ Webページに変更を加えてpushした後、何らかの理由でデプロ�
 ## よくあるつまずき（チェックリスト）
 - 設定直後は反映に1〜3分かかることがあります（5分待っても出ない場合はActionsを確認）
 - PagesのSource: `Deploy from a branch`／Branch: `main`／Folder: `/ (root)` を選んでいるか
-- 404が出るときは、リポジトリ直下に `index.html` があるか確認（サブフォルダに置いていないか）
+- 404が出るときは、リポジトリ直下に `index.html` があるか確認（サブフォルダーに置いていないか）
 - リポジトリをPrivateにしている場合、Pagesの公開可否や可視性に注意（学習用はPublic推奨）
 
 次へ → [CSS/JavaScript で拡張](./05-style-and-js.md)
