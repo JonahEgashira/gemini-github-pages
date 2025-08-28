@@ -9,6 +9,7 @@
 - 4. GitHub Pages へデプロイ: [04-deploy-github-pages.md](./04-deploy-github-pages.md)
 - 5. CSS/JavaScript で拡張: [05-style-and-js.md](./05-style-and-js.md)
 - 6. Gemini CLI Tips: [06-tips-and-tricks.md](./06-tips-and-tricks.md)
+- 7. ローカルAgent CLI活用術: [07-agent-cli-local.md](./07-agent-cli-local.md)
 
 初めての方は 1 から順に読み進めてください。改善提案や修正は PR を出してくれると助かります。
 
