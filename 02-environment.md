@@ -111,7 +111,11 @@ npx @google/gemini-cli
 
 - Google アカウントでのログインを求められるので、`1. Login with Google`を選択しましょう。
 
-**⚠️注意**：慶應のGoogleアカウントではGeminiの利用が制限されていて使えません。個人のGoogleアカウントでログインしてください。
+~~**⚠️注意**：慶應のGoogleアカウントではGeminiの利用が制限されていて使えません。個人のGoogleアカウントでログインしてください。~~
+
+2025年7月現在、慶應義塾がGoogle Workspace for Educationを契約しており、@keio.jpアカウントでログインしてもおそらく使用できます。
+
+参考: https://www.mita.itc.keio.ac.jp/ja/software_ai_guideline.html
 
 ![gemini-login](./images/gemini-login.png)
 
@@ -135,7 +139,6 @@ npx @google/gemini-cli
 【ログイントラブルのヒント】
 - ターミナルのURLがクリックできない場合は、右クリックでコピーしてブラウザに貼り付け
 - 認証コード入力に失敗した場合は、もう一度 `npx @google/gemini-cli` を実行し新しいコードで再認証
-- 慶應のGoogleアカウントでは利用制限があります。必ず個人のGoogleアカウントを使用してください
 
 次へ → [Gemini CLI でサイト作成](./03-build-with-gemini.md)
 目次へ → [ホーム](./index.md)
