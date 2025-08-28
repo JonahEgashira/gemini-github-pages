@@ -132,5 +132,10 @@ npx @google/gemini-cli
 
 ここまで確認できればCodespaces環境の準備は完了です。
 
+【ログイントラブルのヒント】
+- ターミナルのURLがクリックできない場合は、右クリックでコピーしてブラウザに貼り付け
+- 認証コード入力に失敗した場合は、もう一度 `npx @google/gemini-cli` を実行し新しいコードで再認証
+- 慶應のGoogleアカウントでは利用制限があります。必ず個人のGoogleアカウントを使用してください
+
 次へ → [Gemini CLI でサイト作成](./03-build-with-gemini.md)
 目次へ → [ホーム](./index.md)
