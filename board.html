@@ -93,6 +93,9 @@
     const syncEl = document.getElementById('sync');
     let cursor = null;
     let lastItems = new Map();
+    // Optimistic UI support
+    let serverItems = [];
+    let pending = []; // { id, ts, text, _until }
 
     function escapeHtml(s) {
       return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
@@ -120,7 +123,10 @@
         if (!res.ok) throw new Error(data?.message || '送信に失敗しました');
         textEl.value = ''; countEl.textContent = `0 / ${MAX}`;
         statusEl.textContent = '送信しました'; statusEl.className = 'status ok';
-        // 直後の反映遅延を抑えるため再読込
+        // 楽観的表示: 即時に先頭へ反映（最大90秒保持）
+        pending.unshift({ ...data, _until: Date.now() + 90_000 });
+        render(serverItems);
+        // サーバー側の反映を取得
         cursor = null; lastItems.clear();
         await load(true);
       } catch (e) {
@@ -137,7 +143,17 @@
     });
 
     function render(items) {
-      listEl.innerHTML = items.map(it => {
+      serverItems = items || [];
+      // Drop expired pending
+      const now = Date.now();
+      pending = pending.filter(p => (p._until || 0) > now);
+
+      // Prefer server items; add pending only if not present
+      const byId = new Map(serverItems.map(it => [it.id, it]));
+      for (const p of pending) if (!byId.has(p.id)) byId.set(p.id, p);
+
+      const combined = Array.from(byId.values()).sort((a,b) => b.ts - a.ts);
+      listEl.innerHTML = combined.map(it => {
         const when = new Date(it.ts).toLocaleTimeString();
         return `<div class="item"><div>${escapeHtml(it.text)}</div><div class="meta">${when}</div></div>`;
       }).join('');
