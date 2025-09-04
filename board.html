@@ -58,7 +58,6 @@
           </div>
           <textarea id="text" placeholder="例: Codespaces で URL が出ません。 どうすれば良いですか？"></textarea>
           <div class="controls">
-            <div class="hint">最大 300 文字</div>
             <div class="count" id="count">0 / 300</div>
           </div>
           <button id="send">投稿する</button>
@@ -80,8 +79,17 @@
   </div>
 
   <script>
-    // Default to the deployed Worker URL; allow ?api= for local dev override
-    const API_BASE = new URLSearchParams(location.search).get('api') || 'https://anon-board.jonah-egashira.workers.dev';
+    // Auto-select API base:
+    // - If served from localhost:5500, use local Worker (wrangler dev)
+    // - Otherwise, use the deployed Worker URL
+    // - `?api=` remains as an optional manual override
+    const _params = new URLSearchParams(location.search);
+    const _override = _params.get('api');
+    const _isLocalHost = /^http:\/\/(localhost|127\.0\.0\.1):5500$/i.test(location.origin);
+    const _defaultBase = _isLocalHost
+      ? 'http://127.0.0.1:8787'
+      : 'https://anon-board.jonah-egashira.workers.dev';
+    const API_BASE = _override || _defaultBase;
     document.getElementById('apiLabel').textContent = API_BASE.replace(/^https?:\/\//,'');
 
     const MAX = 300;
