@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>匿名質問ボード</title>
+  <style>
+    :root {
+      --border: #e5e7eb;
+      --muted: #6b7280;
+      --bg: #f7f8fb;
+    }
+    /* Ensure widths include padding and borders so edges line up */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; background: var(--bg); color: #111; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+    .sub { color: var(--muted); font-size: .95rem; margin: 0 0 16px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    .card { background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 1px 2px rgba(16,24,40,.04); }
+    .card h2 { font-size: 1.05rem; margin: 0 0 8px; }
+    .card .body { padding: 16px; }
+    .row { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+    .row > * { margin: .25rem 0; }
+    .pill { background: #f1f5f9; border: 1px solid var(--border); padding: .25rem .6rem; border-radius: 999px; font-size: .78rem; color: #111; }
+    textarea { width: 100%; min-height: 140px; padding: .8rem; border: 1px solid #cbd5e1; border-radius: 10px; font: inherit; resize: vertical; background: #fff; }
+    textarea:focus { outline: 2px solid #2563eb22; border-color: #93c5fd; }
+    .controls { display: flex; align-items: center; justify-content: space-between; margin: 8px 0 14px; }
+    .hint { color: #64748b; font-size: .85rem; }
+    .count { color: #94a3b8; font-size: .85rem; }
+    button { background: #111; color: #fff; border: 0; border-radius: 10px; padding: .6rem 1rem; cursor: pointer; font-weight: 600; }
+    button[disabled] { opacity: .6; cursor: not-allowed; }
+    .status { color: #475569; font-size: .85rem; margin-top: .25rem; min-height: 1.2em; }
+    .ok { color: #0f9d58; }
+    .err { color: #c0392b; }
+    .list-wrap { padding: 10px; }
+    .list { border: 1px dashed var(--border); border-radius: 10px; padding: 8px; max-height: 70vh; overflow: auto; background: #fafafa; }
+    .item { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: .75rem; margin: .5rem 0; }
+    .meta { color: #94a3b8; font-size: .8rem; margin-top: .35rem; }
+    .header-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>匿名質問ボード</h1>
+    <div class="sub">Gemini CLI講習会用の匿名質問ページです。</div>
+    <div class="grid">
+      <div class="card">
+        <div class="body">
+          <div class="header-line">
+            <h2>投稿</h2>
+            <div class="row">
+              <div class="pill">API: <span id="apiLabel"></span></div>
+              <div class="pill">更新: <span id="sync"></span></div>
+            </div>
+          </div>
+          <textarea id="text" placeholder="例: Codespaces で URL が出ません。 どうすれば良いですか？"></textarea>
+          <div class="controls">
+            <div class="hint">最大 300 文字</div>
+            <div class="count" id="count">0 / 300</div>
+          </div>
+          <button id="send">投稿する</button>
+          <div id="postStatus" class="status"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="body">
+          <div class="header-line">
+            <h2>質問一覧</h2>
+            <div class="status" id="loadStatus"></div>
+          </div>
+          <div class="list-wrap">
+            <div class="list" id="list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Default to the deployed Worker URL; allow ?api= for local dev override
+    const API_BASE = new URLSearchParams(location.search).get('api') || 'https://anon-board.jonah-egashira.workers.dev';
+    document.getElementById('apiLabel').textContent = API_BASE.replace(/^https?:\/\//,'');
+
+    const MAX = 300;
+    const textEl = document.getElementById('text');
+    const sendBtn = document.getElementById('send');
+    const countEl = document.getElementById('count');
+    const statusEl = document.getElementById('postStatus');
+    const listEl = document.getElementById('list');
+    const loadStatusEl = document.getElementById('loadStatus');
+    const syncEl = document.getElementById('sync');
+    let cursor = null;
+    let lastItems = new Map();
+
+    function escapeHtml(s) {
+      return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+    }
+
+    textEl.addEventListener('input', () => {
+      const val = textEl.value;
+      if (val.length > MAX) {
+        textEl.value = val.slice(0, MAX);
+      }
+      countEl.textContent = `${textEl.value.length} / ${MAX}`;
+    });
+
+    async function post() {
+      const text = textEl.value.trim();
+      if (!text) return;
+      sendBtn.disabled = true; statusEl.textContent = '送信中...'; statusEl.className = 'status';
+      try {
+        const res = await fetch(`${API_BASE}/api/messages`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ text })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.message || '送信に失敗しました');
+        textEl.value = ''; countEl.textContent = `0 / ${MAX}`;
+        statusEl.textContent = '送信しました'; statusEl.className = 'status ok';
+        // 直後の反映遅延を抑えるため再読込
+        cursor = null; lastItems.clear();
+        await load(true);
+      } catch (e) {
+        statusEl.textContent = e.message;
+        statusEl.className = 'status err';
+      } finally {
+        sendBtn.disabled = false;
+      }
+    }
+
+    sendBtn.addEventListener('click', post);
+    textEl.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') post();
+    });
+
+    function render(items) {
+      listEl.innerHTML = items.map(it => {
+        const when = new Date(it.ts).toLocaleTimeString();
+        return `<div class="item"><div>${escapeHtml(it.text)}</div><div class="meta">${when}</div></div>`;
+      }).join('');
+    }
+
+    async function load(force=false) {
+      try {
+        loadStatusEl.textContent = '読込中...';
+        const url = new URL(`${API_BASE}/api/messages`);
+        url.searchParams.set('limit', '50');
+        if (cursor && !force) url.searchParams.set('cursor', cursor);
+        const res = await fetch(url, { cache: 'no-store' });
+        const data = await res.json();
+        if (!res.ok) throw new Error('読込に失敗しました');
+
+        // 最新50件で十分なので、常に一括描画
+        const items = data.items || [];
+        // 去年のものが混ざらないよう簡易ソート（保険）
+        items.sort((a,b) => b.ts - a.ts);
+
+        // 変更検知（最低限）
+        const key = JSON.stringify(items.map(i => i.id));
+        if (key !== load._lastKey) {
+          render(items);
+          load._lastKey = key;
+        }
+
+        cursor = data.cursor || null; // 未使用だが将来の拡張用
+        loadStatusEl.textContent = '';
+        syncEl.textContent = new Date().toLocaleTimeString();
+      } catch (e) {
+        loadStatusEl.textContent = e.message;
+      }
+    }
+    load._lastKey = '';
+
+    // 初回ロードとポーリング
+    load(true);
+    setInterval(load, 5000);
+  </script>
+</body>
+</html>
