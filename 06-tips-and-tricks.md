@@ -109,5 +109,6 @@ ChatGPTやGeminiなどの大規模言語モデル（LLM）は、会話が長く�
 
 ---
 
+前へ → [CSS/JavaScriptで拡張](./05-style-and-js.md)
 次へ → [おわりに](./07-outro.md)
 目次へ → [ホーム](./index.md)

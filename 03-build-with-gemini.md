@@ -186,5 +186,6 @@ user> 変更を確認してpushしてください
 
 ---
 
+前へ → [開発環境の準備](./02-environment.md)
 次へ → [GitHub Pages へデプロイ](./04-deploy-github-pages.md)
 目次へ → [ホーム](./index.md)

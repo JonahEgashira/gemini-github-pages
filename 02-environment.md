@@ -142,5 +142,6 @@ npx @google/gemini-cli
 - ターミナルのURLがクリックできない場合は、右クリックでコピーしてブラウザーに貼り付け
 - 認証コード入力に失敗した場合は、もう一度 `npx @google/gemini-cli` を実行し新しいコードで再認証
 
+前へ → [はじめに](./01-introduction.md)
 次へ → [Gemini CLI でサイト作成](./03-build-with-gemini.md)
 目次へ → [ホーム](./index.md)
