@@ -101,6 +101,8 @@ Codespaces/VS Codeの画面構成について簡単に説明します。
 それでは実際にCodespaces上でGemini CLIを動かしてみましょう。
 
 Codespaces のターミナルで以下を実行します。
+実行は、このコマンドをターミナルに入力（コピーアンドペースト）し、Enterキーを押すことでできます。
+
 ```bash
 npx @google/gemini-cli
 ```
