@@ -114,8 +114,7 @@
     const statusEl = document.getElementById('postStatus');
     const listEl = document.getElementById('list');
     const syncEl = document.getElementById('sync');
-    let cursor = null;
-    let lastItems = new Map();
+    // pagination cursor is intentionally unused; always fetch latest 50
     // Optimistic UI support
     let serverItems = [];
     let pending = []; // { id, ts, text, _until }
@@ -151,8 +150,7 @@
         pending.unshift({ ...data, _until: Date.now() + 90_000 });
         render(serverItems);
         // サーバー側の反映を取得
-        cursor = null; lastItems.clear();
-        await load(true);
+        await load();
       } catch (e) {
         statusEl.textContent = e.message;
         statusEl.className = 'status err';
@@ -249,11 +247,10 @@
       if (el) el.textContent = data.likes ?? el.textContent;
     }
 
-    async function load(force=false) {
+    async function load() {
       try {
         const url = new URL(`${API_BASE}/api/messages`);
         url.searchParams.set('limit', '50');
-        if (cursor && !force) url.searchParams.set('cursor', cursor);
         const res = await fetch(url, { cache: 'no-store' });
         const data = await res.json();
         if (!res.ok) throw new Error('読込に失敗しました');
@@ -270,7 +267,6 @@
           load._lastKey = key;
         }
 
-        cursor = data.cursor || null; // 未使用だが将来の拡張用
         syncEl.textContent = new Date().toLocaleTimeString();
       } catch (e) {
       }
@@ -278,7 +274,7 @@
     load._lastKey = '';
 
     // 初回ロードとポーリング
-    load(true);
+    load();
     setInterval(load, 5000);
   </script>
 </body>
