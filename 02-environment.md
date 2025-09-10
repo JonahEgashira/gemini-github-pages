@@ -67,6 +67,8 @@ GitHubが提供するクラウドの開発環境です。
 3. Codespace作成の設定画面に移行するので、Repositoryから先ほど作成したリポジトリを選択します。その他の設定はデフォルトのままでOKです。**Create codespace**をクリックします。
 ![GitHub-Code-Settings](./images/github-code-settings.png)
 
+作成から起動までに1〜3分ほどかかる場合があります。ブラウザーは閉じずにそのまま待ちましょう。
+
 <details markdown="1">
 <summary>
 Codespacesの料金について
@@ -138,9 +140,15 @@ npx @google/gemini-cli
 
 ここまで確認できればCodespaces環境の準備は完了です。
 
+補足:
+- Gemini CLIを終了するには、CLIを実行しているターミナルで `Ctrl + C` を押します。
+- この後は「Gemini CLI用ターミナル（対話用）」と「通常のbashターミナル（コマンド実行用）」の2つを並行して使います。画面右上の「＋」から新しいターミナルを開き、`bash` と表示されるタブでコマンドを実行してください。
+- もしローカルPCで進めたい場合は `local-setup.md` を参照してください。
+
 【ログイントラブルのヒント】
 - ターミナルのURLがクリックできない場合は、右クリックでコピーしてブラウザーに貼り付け
 - 認証コード入力に失敗した場合は、もう一度 `npx @google/gemini-cli` を実行し新しいコードで再認証
+- 組織アカウントで認可がブロックされる場合は、個人アカウントでのログインや別ブラウザーでの再試行を検討
 
 前へ → [はじめに](./01-introduction.md)
 次へ → [Gemini CLI でサイト作成](./03-build-with-gemini.md)

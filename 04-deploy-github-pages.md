@@ -34,6 +34,11 @@ GitHub Pagesは、GitHubが提供するサービスで、簡単にWebサイト�
 4. **公開するブランチを選択**
    - 「Source」セクションで、公開したいブランチ（通常は`main`）を選択します。
    - 「Save」をクリックして設定を保存します。
+
+   （補足）GitHub Pages には以下の2種類があります。
+   - ユーザー/組織サイト: `https://username.github.io/`（専用のリポジトリ名が必要）
+   - プロジェクトサイト: `https://username.github.io/リポジトリ名`（本資料はこの形を想定）
+   今回はプロジェクトサイト想定のため、リポジトリ直下に `index.html` を置き、`main` ブランチを公開対象にします。
    <details markdown="1"><summary>💡 ブランチとは？</summary>
 
    **ブランチ（Branch）** とは、Gitで管理されているプロジェクトの「作業の流れ」を分岐させる仕組みです。
@@ -90,6 +95,7 @@ Webページに変更を加えてpushした後、何らかの理由でデプロ�
 - PagesのSource: `Deploy from a branch`／Branch: `main`／Folder: `/ (root)` を選んでいるか
 - 404が出るときは、リポジトリ直下に `index.html` があるか確認（サブフォルダーに置いていないか）
 - リポジトリをPrivateにしている場合、Pagesの公開可否や可視性に注意（学習用はPublic推奨）
+- `Settings → Pages` が表示されない、またはグレーアウトしている場合は、権限設定やリポジトリの可視性、組織ポリシーを確認してください。
 
 前へ → [Gemini CLIでサイト作成](./03-build-with-gemini.md)
 次へ → [CSS/JavaScript で拡張](./05-style-and-js.md)
