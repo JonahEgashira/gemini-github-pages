@@ -8,6 +8,16 @@ Endpoints
 - `GET /api/messages?limit=50&cursor=` → returns `{ items, cursor }`
 - `DELETE /api/messages/:id` (admin only, header `Authorization: Bearer <ADMIN_TOKEN>`)
 
+### Likes (KV-based)
+
+- `POST /api/messages/:id/like` → increments like count, returns `{ id, likes, liked: true }`
+- `DELETE /api/messages/:id/like` → decrements like count, returns `{ id, likes, liked: false }`
+- `GET /api/messages` now includes `likes` per item.
+
+Notes:
+- Per-user duplication is limited via a cookie `uid` scoped to the Worker origin. The browser must send credentials to the Worker; see the example front-end in `board.html` using `credentials: 'include'` for like/unlike.
+- This simple KV approach is eventually consistent and may drop increments under rare concurrent updates. For strict atomicity, migrate the like counter to Durable Objects or D1.
+
 Quick start
 1) Install Wrangler (optional global):
    - `npm i -D wrangler`
@@ -23,7 +33,7 @@ Quick start
 
 Notes
 - KV is eventually consistent. A few seconds delay in lists can happen.
-- For tighter consistency, consider Durable Objects (not needed for this class).
+- For tighter consistency, consider Durable Objects (not needed for this class). Likes are a good candidate if you expect high concurrency.
 - Basic per-IP rate limit via KV with TTL; adjust `RATE_LIMIT_PER_MIN` in code.
 
 Security / CORS

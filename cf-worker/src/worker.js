@@ -8,6 +8,8 @@ const MAX_LENGTH = 300; // max chars per post
 const RATE_LIMIT_PER_MIN = 5; // per IP per minute
 const KEY_PREFIX = 'msg/';
 const RATE_PREFIX = 'rate/';
+const LIKE_COUNT_PREFIX = 'like/c/'; // like count per message id
+const LIKE_USER_PREFIX = 'like/u/';  // per (message id + uid) marker
 const MAX_TS = 9999999999999; // for reverse timestamp ordering
 
 // Allow only specific origins (CORS)
@@ -34,8 +36,22 @@ export default {
         const res = await handleList(request, env);
         return withCORS(request, res);
       }
-      if (url.pathname.startsWith('/api/messages/') && request.method === 'DELETE') {
-        const id = url.pathname.split('/').pop();
+      // Like endpoints (exact: /api/messages/:id/like)
+      if (/^\/api\/messages\/[^/]+\/like$/.test(url.pathname)) {
+        const id = url.pathname.split('/')[3];
+        if (request.method === 'POST') {
+          const res = await handleLike(id, request, env);
+          return withCORS(request, res);
+        }
+        if (request.method === 'DELETE') {
+          const res = await handleUnlike(id, request, env);
+          return withCORS(request, res);
+        }
+      }
+
+      // Admin delete (exact: /api/messages/:id)
+      if (request.method === 'DELETE' && /^\/api\/messages\/[^/]+$/.test(url.pathname)) {
+        const id = url.pathname.split('/')[3];
         const res = await handleDelete(id, request, env);
         return withCORS(request, res);
       }
@@ -96,7 +112,15 @@ async function handleList(request, env) {
     list.keys.map(async (k) => {
       const v = await env.AIC_LECTURE.get(k.name);
       if (!v) return null;
-      try { return JSON.parse(v); } catch { return null; }
+      try {
+        const obj = JSON.parse(v);
+        // Attach like count (best-effort)
+        const c = await env.AIC_LECTURE.get(`${LIKE_COUNT_PREFIX}${obj.id}`);
+        obj.likes = clamp(parseInt(c || '0', 10), 0, 2_147_483_647);
+        return obj;
+      } catch {
+        return null;
+      }
     })
   );
 
@@ -140,6 +164,7 @@ function handleOptions(request) {
   h.set('Vary', 'Origin');
   h.set('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
   h.set('Access-Control-Allow-Headers', request.headers.get('Access-Control-Request-Headers') || 'Content-Type, Authorization');
+  h.set('Access-Control-Allow-Credentials', 'true');
   h.set('Access-Control-Max-Age', '86400');
   return new Response(null, { status: 204, headers: h });
 }
@@ -157,6 +182,7 @@ function withCORS(request, res) {
   h.set('Vary', 'Origin');
   h.set('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
   h.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  h.set('Access-Control-Allow-Credentials', 'true');
   return new Response(res.body, { status: res.status, headers: h });
 }
 
@@ -177,3 +203,84 @@ function getIP(request) {
 }
 
 function clamp(n, min, max) { return Math.max(min, Math.min(max, isNaN(n) ? min : n)); }
+
+// --- Likes ---
+async function handleLike(id, request, env) {
+  const { uid, setCookie } = ensureUID(request);
+  const countKey = `${LIKE_COUNT_PREFIX}${id}`;
+  const userKey = `${LIKE_USER_PREFIX}${id}/${uid}`;
+
+  // Already liked?
+  const already = await env.AIC_LECTURE.get(userKey);
+  let count = clamp(parseInt(await env.AIC_LECTURE.get(countKey) || '0', 10), 0, 2_147_483_647);
+  if (already) {
+    const headers = { 'Cache-Control': 'no-store' };
+    if (setCookie) headers['Set-Cookie'] = setCookie;
+    return json({ id, likes: count, liked: true }, 200, headers);
+  }
+
+  await env.AIC_LECTURE.put(userKey, '1');
+  count = clamp(count + 1, 0, 2_147_483_647);
+  await env.AIC_LECTURE.put(countKey, String(count));
+  const headers = { 'Cache-Control': 'no-store' };
+  if (setCookie) headers['Set-Cookie'] = setCookie;
+  return json({ id, likes: count, liked: true }, 200, headers);
+}
+
+async function handleUnlike(id, request, env) {
+  const { uid, setCookie } = ensureUID(request);
+  const countKey = `${LIKE_COUNT_PREFIX}${id}`;
+  const userKey = `${LIKE_USER_PREFIX}${id}/${uid}`;
+
+  const has = await env.AIC_LECTURE.get(userKey);
+  let count = clamp(parseInt(await env.AIC_LECTURE.get(countKey) || '0', 10), 0, 2_147_483_647);
+  if (!has) {
+    const headers = { 'Cache-Control': 'no-store' };
+    if (setCookie) headers['Set-Cookie'] = setCookie;
+    return json({ id, likes: count, liked: false }, 200, headers);
+  }
+
+  await env.AIC_LECTURE.delete(userKey);
+  count = Math.max(0, count - 1);
+  await env.AIC_LECTURE.put(countKey, String(count));
+  const headers = { 'Cache-Control': 'no-store' };
+  if (setCookie) headers['Set-Cookie'] = setCookie;
+  return json({ id, likes: count, liked: false }, 200, headers);
+}
+
+function ensureUID(request) {
+  const cookies = parseCookies(request.headers.get('Cookie') || '');
+  let uid = cookies['uid'] || '';
+  let setCookie = '';
+  if (!uid) {
+    uid = crypto.randomUUID();
+    setCookie = buildUIDCookie(uid, request);
+  }
+  return { uid, setCookie: setCookie || null };
+}
+
+function parseCookies(header) {
+  const out = {};
+  header.split(';').forEach(part => {
+    const i = part.indexOf('=');
+    if (i > -1) {
+      const k = part.slice(0, i).trim();
+      const v = part.slice(i + 1).trim();
+      if (k) out[k] = v;
+    }
+  });
+  return out;
+}
+
+function buildUIDCookie(uid, request) {
+  const origin = request.headers.get('Origin') || '';
+  let attrs = ['Path=/', 'Max-Age=31536000'];
+  // Cross-site calls from GitHub Pages need SameSite=None; Secure
+  if (/^https:\/\//.test(origin)) {
+    attrs.push('SameSite=None', 'Secure');
+  } else {
+    // local dev (same-site) works with Lax
+    attrs.push('SameSite=Lax');
+  }
+  return `uid=${uid}; ${attrs.join('; ')}`;
+}

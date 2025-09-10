@@ -46,6 +46,14 @@
     .meta { color: #94a3b8; font-size: .8rem; }
     .item-text { font-size: 1.06rem; line-height: 1.6; }
     .header-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .item-actions { display:flex; align-items:center; gap:.75rem; margin-top:.5rem; }
+    .like-btn { display:inline-flex; align-items:center; gap:.35rem; padding:.2rem .25rem; border:0; background:transparent; color:#64748b; font-size:.9rem; cursor:pointer; }
+    .like-btn:hover { color:#111; }
+    .like-btn:disabled { opacity:.6; cursor:not-allowed; }
+    .like-btn .heart { width:18px; height:18px; stroke: currentColor; fill: transparent; stroke-width: 2; }
+    .like-btn.liked { color:#ef4444; }
+    .like-btn.liked .heart { fill: currentColor; }
+    .like-count { font-variant-numeric: tabular-nums; }
   </style>
 </head>
 <body>
@@ -108,6 +116,7 @@
     // Optimistic UI support
     let serverItems = [];
     let pending = []; // { id, ts, text, _until }
+    const liking = new Set(); // in-flight like ops by id
 
     function escapeHtml(s) {
       return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
@@ -168,13 +177,73 @@
       listEl.innerHTML = combined.map((it, i) => {
         const when = new Date(it.ts).toLocaleTimeString();
         const no = combined.length - i; // simple sequential ID for reference
+        const liked = localStorage.getItem(`liked:${it.id}`) === '1';
+        const likes = typeof it.likes === 'number' ? it.likes : 0;
         return `
           <div class="item">
             <div class="item-head"><div class="item-id">ID: ${no}</div><div class="meta">${when}</div></div>
             <div class="item-text">${escapeHtml(it.text)}</div>
+            <div class="item-actions">
+              <button class="like-btn${liked ? ' liked' : ''}" data-id="${it.id}" aria-pressed="${liked}" title="Like">
+                <svg class="heart" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                <span class="like-count" id="lc-${it.id}">${likes}</span>
+              </button>
+            </div>
           </div>
         `;
       }).join('');
+    }
+
+    // Like/unlike handlers (event delegation)
+    listEl.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.like-btn');
+      if (!btn) return;
+      const id = btn.getAttribute('data-id');
+      if (!id || liking.has(id)) return;
+      liking.add(id);
+      const liked = btn.classList.contains('liked');
+      try {
+        btn.disabled = true;
+        if (liked) {
+          await unlike(id);
+          localStorage.removeItem(`liked:${id}`);
+          btn.classList.remove('liked');
+          btn.setAttribute('aria-pressed', 'false');
+        } else {
+          await like(id);
+          localStorage.setItem(`liked:${id}`, '1');
+          btn.classList.add('liked');
+          btn.setAttribute('aria-pressed', 'true');
+        }
+      } catch (err) {
+      } finally {
+        btn.disabled = false;
+        liking.delete(id);
+      }
+    });
+
+    async function like(id) {
+      const res = await fetch(`${API_BASE}/api/messages/${encodeURIComponent(id)}/like`, {
+        method: 'POST',
+        credentials: 'include'
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error('like failed');
+      const el = document.getElementById(`lc-${id}`);
+      if (el) el.textContent = data.likes ?? el.textContent;
+    }
+
+    async function unlike(id) {
+      const res = await fetch(`${API_BASE}/api/messages/${encodeURIComponent(id)}/like`, {
+        method: 'DELETE',
+        credentials: 'include'
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error('unlike failed');
+      const el = document.getElementById(`lc-${id}`);
+      if (el) el.textContent = data.likes ?? el.textContent;
     }
 
     async function load(force=false) {
