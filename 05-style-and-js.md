@@ -14,6 +14,12 @@ Codespacesのタブを選択し、緑色の🟢Activeとなっているものが
 
 ここからCodespaceを開くことで、前回の作業途中から再開できます。
 
+Codespaceが開けたら、ターミナルで`npx @google/gemini-cli`を実行して、Gemini CLIを起動しましょう。
+
+もしターミナルが開かれていない場合は、左上の画像の赤丸のボタンを押すことで、表示/非表示を切り替えできます。
+
+![Terminal Open](./images/terminal-open.png)
+
 ## 1. HTMLでコンテンツを増やす
 
 HTMLファイルだけのWebサイトでは見た目が寂しいので、内容と見た目を改善しましょう。
