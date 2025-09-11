@@ -149,6 +149,48 @@
       return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
     }
 
+    // Convert URLs in plain text to safe clickable links (opens in new tab)
+    function linkify(text) {
+      if (!text) return '';
+      const URL_RE = /(\bhttps?:\/\/[^\s<>"'`]+|\bwww\.[^\s<>"'`]+)/gi;
+      let out = '';
+      let last = 0;
+      text.replace(URL_RE, (match, _g, idx) => {
+        // Append the chunk before the URL
+        out += escapeHtml(text.slice(last, idx));
+        let url = match;
+        // Trim common trailing punctuation that is not part of the URL
+        let trailing = '';
+        while (/[)\]\}.,!?:;]$/.test(url)) {
+          trailing = url.slice(-1) + trailing;
+          url = url.slice(0, -1);
+        }
+        let href = url;
+        if (/^www\./i.test(url)) href = 'https://' + url;
+        // Validate protocol strictly to avoid javascript: etc.
+        let ok = false;
+        try {
+          const u = new URL(href);
+          ok = u.protocol === 'http:' || u.protocol === 'https:';
+        } catch (_) { ok = false; }
+        if (!ok) {
+          // Fall back to escaped text if not a valid http(s) URL
+          out += escapeHtml(match);
+        } else {
+          const safeHref = escapeHtml(href);
+          const label = escapeHtml(url);
+          out += `<a href="${safeHref}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+        }
+        // Append any trimmed trailing punctuation safely
+        if (trailing) out += escapeHtml(trailing);
+        last = idx + match.length;
+        return match;
+      });
+      // Append the remainder
+      out += escapeHtml(text.slice(last));
+      return out;
+    }
+
     textEl.addEventListener('input', () => {
       const val = textEl.value;
       if (val.length > MAX) {
@@ -225,7 +267,7 @@
               <div class="item-id">No: ${no} <span class="meta" style="margin-left:.5rem;">ID: ${shortId}</span></div>
               <div class="meta">${when}</div>
             </div>
-            <div class="item-text">${escapeHtml(it.text)}</div>
+            <div class="item-text">${linkify(it.text)}</div>
             <div class="item-actions">
               <button class="like-btn${liked ? ' liked' : ''}" data-id="${it.id}" aria-pressed="${liked}" title="Like">
                 <svg class="heart" viewBox="0 0 24 24" aria-hidden="true">
