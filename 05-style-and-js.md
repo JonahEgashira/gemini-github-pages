@@ -5,6 +5,15 @@ title: CSS/JavaScriptで拡張
 
 # CSS、JavaScriptでWebサイトをアップグレード
 
+## 再度Codespaceを開く
+
+前回の作業途中からCodespaceを開くには、自分のリポジトリをGitHub上で開いて、緑の`Code`ボタンをクリックします。
+Codespacesのタブを選択し、緑色の🟢Activeとなっているものが存在すれば、その緑色の丸の左側のリンク（画像ではuniquitous space fiestaとなっている部分、これはみなさんにそれぞれランダムな名前が割り振られます）をクリックします。
+
+![Codespace Resume](./images/codespace-resume1.png)
+
+ここからCodespaceを開くことで、前回の作業途中から再開できます。
+
 ## 1. HTMLでコンテンツを増やす
 
 HTMLファイルだけのWebサイトでは見た目が寂しいので、内容と見た目を改善しましょう。
