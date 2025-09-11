@@ -19,6 +19,9 @@ const ALLOWED_ORIGINS = [
   // Local development origins
   'http://localhost:5500',
   'http://127.0.0.1:5500',
+  // IPv6 loopback/unspecified shown by some local servers
+  'http://[::]:5500',
+  'http://[::1]:5500',
 ];
 
 export default {
